@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home1/bathlome/public_html/peatechservice.com/
+    - /bin/cp -R * $DEPLOYPATH

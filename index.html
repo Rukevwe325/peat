@@ -1,0 +1,42 @@
+<!-- Add this to your existing CSS style section -->
+<style>
+    .talent-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .talent-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        border-color: var(--primary-blue);
+    }
+    
+    .talent-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .talent-card:hover::after {
+        opacity: 1;
+    }
+    
+    .talent-card .btn-outline-primary {
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+        transition: all 0.3s ease;
+    }
+    
+    .talent-card:hover .btn-outline-primary {
+        background-color: var(--primary-blue);
+        color: white;
+    }
+</style>

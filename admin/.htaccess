@@ -1,0 +1,17 @@
+# Disable directory browsing
+Options -Indexes
+
+# Protect files
+<FilesMatch "\.(ini|log|sql|bak|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Redirect to dashboard if someone accesses /admin/
+DirectoryIndex dashboard.php
+
+# Block access to sensitive files
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>

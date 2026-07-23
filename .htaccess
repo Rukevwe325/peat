@@ -1,0 +1,30 @@
+RewriteEngine On
+RewriteBase /
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# FIRST: Handle specific pages (articles listing)
+RewriteRule ^articles$ articles.php [L,QSA]
+RewriteRule ^peasyn$ peasyn.php [L,QSA]
+
+# SECOND: Handle article URLs (article/slug)
+RewriteRule ^article/([^/]+)$ article.php?slug=$1 [L,QSA]
+
+# THIRD: Remove .php extension from ALL OTHER pages
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
+
+# Redirect old article.php?slug= URLs to new clean URLs
+RewriteCond %{THE_REQUEST} /article\.php\?slug=([^\s&]+) [NC]
+RewriteRule ^ /article/%1? [L,R=301]
+
+# Custom error pages
+ErrorDocument 404 /error-404.php
