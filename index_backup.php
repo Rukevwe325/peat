@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -681,13 +681,16 @@
         }
 
         /* ============================================
-           PeaSyn Showcase
+           PeaSyn Showcase â€” Cinematic Product Launch
         ============================================ */
+
         .peasyn-showcase-section {
             background: #05111c;
             position: relative;
             overflow: hidden;
         }
+
+        /* Subtle noise grid */
         .peasyn-showcase-section::before {
             content: '';
             position: absolute;
@@ -704,7 +707,7 @@
         .psy-text-zone {
             position: relative;
             z-index: 2;
-            padding: 100px 0 100px;
+            padding: 90px 0 56px;
             text-align: center;
         }
 
@@ -738,7 +741,7 @@
         .psy-subline {
             font-size: 1.15rem;
             color: #64748b;
-            max-width: 600px;
+            max-width: 560px;
             margin: 0 auto 36px;
             line-height: 1.7;
         }
@@ -788,6 +791,510 @@
             background: rgba(255,255,255,0.05);
         }
 
+        /* Full-width dashboard area */
+        .psy-screen-zone {
+            position: relative;
+            z-index: 2;
+            padding: 0 24px 80px;
+        }
+
+        .psy-screen {
+            background: #0a1929;
+            border: 1px solid rgba(255,255,255,0.07);
+            border-radius: 18px;
+            box-shadow:
+                0 0 0 1px rgba(16, 185, 129, 0.08),
+                0 40px 100px rgba(0,0,0,0.7),
+                0 0 80px rgba(16, 185, 129, 0.05) inset;
+            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
+            transition: transform 0.5s ease;
+        }
+
+        .psy-screen:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Titlebar */
+        .psy-titlebar {
+            background: #060f18;
+            padding: 13px 20px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .psy-tb-dot {
+            width: 11px; height: 11px;
+            border-radius: 50%;
+        }
+        .psy-tb-dot.r { background: #ef4444; }
+        .psy-tb-dot.y { background: #f59e0b; }
+        .psy-tb-dot.g { background: #10b981; }
+
+        .psy-tb-label {
+            margin-left: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            color: #334155;
+            text-transform: uppercase;
+        }
+
+        /* Dashboard grid */
+        .psy-dash {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 200px;
+            grid-template-rows: auto auto;
+            gap: 1px;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .psy-panel {
+            background: #0a1929;
+            padding: 22px 24px;
+        }
+
+        .psy-panel-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #334155;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        /* Stat panels */
+        .psy-stat-val {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .psy-stat-unit {
+            font-size: 0.75rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        /* Trend sparkline */
+        .psy-sparkline {
+            margin-top: 10px;
+        }
+
+        /* Thermal SVG panel */
+        .psy-thermal-panel {
+            grid-column: span 2;
+        }
+
+        /* Status sidebar */
+        .psy-sidebar {
+            grid-row: span 2;
+            border-left: 1px solid rgba(255,255,255,0.04);
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .psy-status-item {
+            background: #060f18;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .psy-status-item.ok {
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        .psy-status-item.warn {
+            border-color: rgba(245, 158, 11, 0.2);
+        }
+
+        .psy-status-title {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #475569;
+            margin-bottom: 6px;
+        }
+
+        .psy-status-val {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .psy-status-val.ok { color: #10b981; }
+        .psy-status-val.warn { color: #f59e0b; }
+
+        .psy-live-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 4px;
+            font-size: 0.65rem;
+            color: #475569;
+        }
+
+        .psy-live-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+            animation: psy-pulse 1.5s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes psy-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .psy-progress-bar-wrap {
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            height: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .psy-progress-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #10b981, #34d399);
+        }
+
+        /* Responsive collapse */
+        @media (max-width: 991px) {
+            .psy-dash {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+            }
+            .psy-thermal-panel { grid-column: span 2; }
+            .psy-sidebar { grid-row: auto; border-left: none; border-top: 1px solid rgba(255,255,255,0.04); grid-column: span 2; flex-direction: row; flex-wrap: wrap; }
+            .psy-status-item { flex: 1; min-width: 140px; }
+        }
+
+        @media (max-width: 575px) {
+            .psy-dash { grid-template-columns: 1fr; }
+            .psy-thermal-panel { grid-column: span 1; }
+            .psy-sidebar { grid-column: span 1; }
+            .psy-screen-zone { padding: 0 12px 60px; }
+            .psy-headline { letter-spacing: -1px; }
+        }
+            position: relative;
+            overflow: hidden;
+            background: #060f18;
+            padding: 0;
+        }
+
+        /* Animated background grid */
+        .peasyn-showcase-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+        }
+
+        /* Soft green glow in top-right */
+        .peasyn-showcase-section::after {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .showcase-inner {
+            position: relative;
+            z-index: 2;
+            padding: 100px 0;
+        }
+
+        .showcase-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+
+        .showcase-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+        }
+
+        .showcase-title span {
+            background: linear-gradient(90deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .showcase-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            font-weight: 400;
+            margin-bottom: 36px;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .showcase-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn-peasyn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            padding: 14px 32px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+            border: none;
+        }
+
+        .btn-peasyn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(16, 185, 129, 0.45);
+            color: #fff;
+        }
+
+        .btn-peasyn-secondary {
+            display: inline-block;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.75);
+            padding: 14px 32px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-peasyn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Key metrics strip */
+        .showcase-metrics {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .showcase-metric {
+            border-left: 2px solid rgba(16, 185, 129, 0.4);
+            padding-left: 16px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Right panel â€” dashboard window */
+        .showcase-dashboard-wrap {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .showcase-dashboard-wrap::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .showcase-window {
+            position: relative;
+            z-index: 1;
+            background: #0d1a26;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(16, 185, 129, 0.1);
+            overflow: hidden;
+            transition: transform 0.6s ease;
+        }
+
+        .showcase-window:hover {
+            transform: translateY(-6px);
+        }
+
+        .window-bar {
+            background: #080f18;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .window-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+        .window-dot.r { background: #ef4444; }
+        .window-dot.y { background: #f59e0b; }
+        .window-dot.g { background: #10b981; }
+
+        .window-label {
+            margin-left: 10px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
+        .window-body {
+            padding: 24px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: #060f18;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+        }
+
+        .stat-card-value {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #10b981;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            color: #475569;
+            text-transform: uppercase;
+        }
+
+        .thermal-viz {
+            background: #060f18;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 14px;
+        }
+
+        .thermal-viz-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #475569;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .defect-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(16, 185, 129, 0.06);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .defect-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        .defect-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+            animation: pulse-dot 1.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .defect-label {
+            font-size: 0.7rem;
+            color: #475569;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .showcase-inner { padding: 70px 0; }
+            .showcase-title { font-size: 2.8rem; }
+            .showcase-dashboard-wrap { padding-left: 0; margin-top: 50px; }
+        }
+
+        @media (max-width: 575.98px) {
+            .showcase-title { font-size: 2.2rem; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -837,26 +1344,142 @@
             <h1 class="hero-title">PEATECH SERVICES</h1>
             <h2 class="hero-subtitle">The Connection Company</h2>
             <p class="hero-tagline">"Connecting Possibility."</p>
-            <p class="lead mb-5">We build bridges that make life and business flow better - connecting people to people, people to products, and products to products.</p>
+            <p class="lead mb-5">We build bridges that make life and business flow better â€” connecting people to people, people to products, and products to products.</p>
             <a href="#contact" class="btn btn-primary-custom btn-lg">Connect With Us</a>
         </div>
     </section>
 
     <!-- PeaSyn Product Showcase Section -->
     <section class="peasyn-showcase-section">
-
-        <div class="psy-text-zone">
+        <div class="showcase-inner">
             <div class="container">
-                <p class="psy-eyebrow">Now Available &mdash; PeaSyn Platform</p>
-                <h2 class="psy-headline">Machine-Aware Simulation Intelligence<br>for <em>Advanced Manufacturing.</em></h2>
-                <p class="psy-subline">PeaSyn unifies machine behavior, process data, simulation, and digital twins to predict, optimize, and accelerate advanced manufacturing.</p>
-                <div class="psy-cta-row">
-                    <a href="peasyn.php" class="psy-btn-solid">Explore PeaSyn &rarr;</a>
-                    <a href="peasyn.php" class="psy-btn-ghost">Request a Demo</a>
+                <div class="row align-items-center g-5">
+
+                    <!-- Left: Copy -->
+                    <div class="col-lg-6">
+                        <p class="showcase-eyebrow">Now Available &mdash; PeaSyn Platform</p>
+                        <h2 class="showcase-title">The Digital Twin<br>Built for <span>Real Metal.</span></h2>
+                        <p class="showcase-subtitle">PeaSyn synchronizes live print telemetry with transient thermal and melt pool physics â€” catching structural defects before they form.</p>
+
+                        <div class="showcase-cta">
+                            <a href="peasyn.php" class="btn-peasyn-primary">Explore PeaSyn &rarr;</a>
+                            <a href="peasyn.php" class="btn-peasyn-secondary">Request a Demo</a>
+                        </div>
+
+                        <div class="showcase-metrics">
+                            <div class="showcase-metric">
+                                <div class="metric-value">~40%</div>
+                                <div class="metric-label">Faster defect detection</div>
+                            </div>
+                            <div class="showcase-metric">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Thermal sync</div>
+                            </div>
+                            <div class="showcase-metric">
+                                <div class="metric-value">Zero</div>
+                                <div class="metric-label">DB dependency</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Dashboard Window -->
+                    <div class="col-lg-6">
+                        <div class="showcase-dashboard-wrap">
+                            <div class="showcase-window">
+                                <div class="window-bar">
+                                    <span class="window-dot r"></span>
+                                    <span class="window-dot y"></span>
+                                    <span class="window-dot g"></span>
+                                    <span class="window-label">PeaSyn &mdash; Live Telemetry Monitor</span>
+                                </div>
+                                <div class="window-body">
+
+                                    <!-- Stats row -->
+                                    <div class="stat-grid">
+                                        <div class="stat-card">
+                                            <div class="stat-card-value">1,642Â°C</div>
+                                            <div class="stat-card-label">Melt Pool Temp</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-card-value">420Â°C/s</div>
+                                            <div class="stat-card-label">Cooling Rate</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-card-value" style="color:#34d399">98.4%</div>
+                                            <div class="stat-card-label">Bead Accuracy</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- SVG Thermal viz -->
+                                    <div class="thermal-viz">
+                                        <div class="thermal-viz-label">Thermal Field &mdash; Layer 14</div>
+                                        <svg viewBox="0 0 340 130" style="width:100%;height:auto;display:block;">
+                                            <defs>
+                                                <linearGradient id="substrateGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#1e3a5f"/>
+                                                    <stop offset="100%" stop-color="#0d1a26"/>
+                                                </linearGradient>
+                                                <radialGradient id="meltGlow" cx="50%" cy="50%" r="50%">
+                                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                                                    <stop offset="20%" stop-color="#fbbf24" stop-opacity="0.8"/>
+                                                    <stop offset="50%" stop-color="#ef4444" stop-opacity="0.5"/>
+                                                    <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+                                                </radialGradient>
+                                                <linearGradient id="beadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <stop offset="0%" stop-color="#3b82f6"/>
+                                                    <stop offset="60%" stop-color="#1a6f5e"/>
+                                                    <stop offset="85%" stop-color="#ef4444"/>
+                                                    <stop offset="100%" stop-color="#fbbf24"/>
+                                                </linearGradient>
+                                                <filter id="glow">
+                                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                                    <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                                                </filter>
+                                            </defs>
+                                            <!-- Substrate block -->
+                                            <rect x="10" y="80" width="300" height="40" rx="4" fill="url(#substrateGrad)" opacity="0.6"/>
+                                            <!-- Deposited bead track -->
+                                            <rect x="10" y="66" width="300" height="18" rx="9" fill="url(#beadGrad)" opacity="0.85"/>
+                                            <!-- Melt pool glow -->
+                                            <ellipse cx="260" cy="72" rx="38" ry="16" fill="url(#meltGlow)" filter="url(#glow)"/>
+                                            <!-- Arc point -->
+                                            <circle cx="260" cy="60" r="6" fill="#fff" opacity="0.95" filter="url(#glow)"/>
+                                            <!-- Thermal halo lines -->
+                                            <ellipse cx="240" cy="72" rx="55" ry="22" fill="none" stroke="#f97316" stroke-width="0.8" opacity="0.3"/>
+                                            <ellipse cx="235" cy="72" rx="75" ry="28" fill="none" stroke="#3b82f6" stroke-width="0.8" opacity="0.2"/>
+                                            <!-- Color bar -->
+                                            <defs>
+                                                <linearGradient id="colorBarV" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" stop-color="#ffffff"/>
+                                                    <stop offset="25%" stop-color="#ef4444"/>
+                                                    <stop offset="60%" stop-color="#f97316"/>
+                                                    <stop offset="100%" stop-color="#3b82f6"/>
+                                                </linearGradient>
+                                            </defs>
+                                            <rect x="320" y="20" width="10" height="100" rx="3" fill="url(#colorBarV)"/>
+                                            <text x="316" y="24" font-size="7" fill="#94a3b8" text-anchor="end">1600</text>
+                                            <text x="316" y="70" font-size="7" fill="#94a3b8" text-anchor="end">800</text>
+                                            <text x="316" y="122" font-size="7" fill="#94a3b8" text-anchor="end">Â°C</text>
+                                        </svg>
+                                    </div>
+
+                                    <!-- Status pill -->
+                                    <div class="defect-row">
+                                        <div class="defect-status">
+                                            <div class="defect-dot"></div>
+                                            Monitoring active â€” no anomalies detected
+                                        </div>
+                                        <div class="defect-label">Layer 14 / 38</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-
     </section>
 
     <!-- Services Section -->
@@ -924,8 +1547,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <h2 class="section-title mb-4">About Peatech Services</h2>
-                    <p class="mb-4">Born in Cleveland, Peatech started as a technology service company. Today, we are a global bridge-builder - connecting people, products, and organizations through intelligent platforms and human-centered innovation.</p>
-                    <p class="mb-4">At Peatech Services, our mission is to connect people, products, and businesses using technology, creativity, and insight - breaking barriers of distance, complexity, and access.</p>
+                    <p class="mb-4">Born in Cleveland, Peatech started as a technology service company. Today, we are a global bridge-builder â€” connecting people, products, and organizations through intelligent platforms and human-centered innovation.</p>
+                    <p class="mb-4">At Peatech Services, our mission is to connect people, products, and businesses using technology, creativity, and insight â€” breaking barriers of distance, complexity, and access.</p>
                     <ul class="feature-list">
                         <li><i class="fas fa-check"></i> Connecting people through digital experiences</li>
                         <li><i class="fas fa-check"></i> Connecting products through intelligent systems</li>
@@ -1051,7 +1674,7 @@
                             <p class="card-text">Specialized staffing solutions connecting businesses with pre-vetted engineers, data scientists, developers, and STEM professionals. We deliver talent that is technically proven, business-ready, and aligned with your project goals.</p>
                             <p class="card-text small mt-2">Right talent. Right structure. Real results.</p>
                             <div class="mt-3">
-                                <span class="btn btn-outline-primary btn-sm">Join Our Team &rarr;</span>
+                                <span class="btn btn-outline-primary btn-sm">Join Our Team â†’</span>
                             </div>
                         </div>
                     </div>
@@ -1083,7 +1706,7 @@
                 <div class="col-lg-6">
                     <div class="vision-content">
                         <h2 class="section-title mb-4">Our Vision</h2>
-                        <p class="mb-4">To become the world's most trusted platform for seamless human and digital connection - empowering individuals, businesses, and products to find, communicate, and grow together.</p>
+                        <p class="mb-4">To become the world's most trusted platform for seamless human and digital connection â€” empowering individuals, businesses, and products to find, communicate, and grow together.</p>
                         <p class="mb-4">We envision a world where connection is seamless, where technology bridges gaps rather than creating them, and where every person, product, and business can reach its full potential through better connections.</p>
                         
                         <div class="vision-stats">
@@ -1268,7 +1891,7 @@
                             </h2>
                             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Our four divisions - Connect, Systems, Media, and HealthConnect - work as an integrated ecosystem. Peatech Connect builds the platforms that bring people together. Peatech Systems creates the technological infrastructure. Peatech Media ensures the right messaging reaches the right audiences. And Peatech HealthConnect applies our connection expertise to healthcare challenges. Together, they provide comprehensive connection solutions.
+                                    Our four divisions â€” Connect, Systems, Media, and HealthConnect â€” work as an integrated ecosystem. Peatech Connect builds the platforms that bring people together. Peatech Systems creates the technological infrastructure. Peatech Media ensures the right messaging reaches the right audiences. And Peatech HealthConnect applies our connection expertise to healthcare challenges. Together, they provide comprehensive connection solutions.
                                 </div>
                             </div>
                         </div>
@@ -1307,7 +1930,7 @@
                             </h2>
                             <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Three key differentiators: 1) We're connection specialists, not just technology providers - every solution is designed with connection as the primary goal. 2) Our unique four-division structure allows us to approach connection challenges from multiple angles simultaneously. 3) We combine deep technical expertise with human-centered design, ensuring our connections are both technologically robust and genuinely useful to people. We don't just build technology - we build bridges.
+                                    Three key differentiators: 1) We're connection specialists, not just technology providers â€” every solution is designed with connection as the primary goal. 2) Our unique four-division structure allows us to approach connection challenges from multiple angles simultaneously. 3) We combine deep technical expertise with human-centered design, ensuring our connections are both technologically robust and genuinely useful to people. We don't just build technology â€” we build bridges.
                                 </div>
                             </div>
                         </div>
@@ -1430,7 +2053,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo">
-                    <p>Peatech Services - The Connection Company. We build bridges that make life and business flow better.</p>
+                    <p>Peatech Services â€” The Connection Company. We build bridges that make life and business flow better.</p>
                     <p><i class="fas fa-map-marker-alt me-2"></i> 5247 Wilson Mills RD #1012 Richmond Heights, OH 44143-3016 United States</p>
                     <p><a href="#">Show on map</a></p>
                     <div class="social-icons mt-4">
@@ -1442,7 +2065,7 @@
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <h5>Need to connect?</h5>
                     <p><i class="fas fa-phone me-2"></i> <a href="tel:+18001234567">+1-800-123-4567</a></p>
-                    <p class="text-muted">Monday - Friday: 8:00-18:00<br>Saturday: 9:00 - 14:00</p>
+                    <p class="text-muted">Monday â€“ Friday: 8:00-18:00<br>Saturday: 9:00 â€“ 14:00</p>
                     <hr class="footer-divider">
                     <p><i class="fas fa-envelope me-2"></i> <a href="mailto:info@peatechservice.com">info@peatechservice.com</a></p>
                 </div>

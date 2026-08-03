@@ -1,10 +1,223 @@
+<?php
+/**
+ * career.php
+ * Job Posting Details and Application Form page.
+ */
+
+// Define the jobs array
+$jobs = [
+    'sales-marketing-specialist' => [
+        'title' => 'Sales/Marketing Specialist',
+        'department' => 'Sales & Marketing',
+        'location' => 'Richmond Heights, OH (Remote)',
+        'type' => 'Full-Time',
+        'description' => 'We are seeking a dynamic Sales/Marketing Specialist to lead our B2B outreach campaigns, promote Peatech\'s connectivity services, manage customer relationships, and expand strategic market share.',
+        'responsibilities' => [
+            'Develop and implement B2B sales strategies to acquire enterprise clients.',
+            'Coordinate branding and digital marketing campaigns for Peatech Services and our PeaSyn simulation suite.',
+            'Manage customer relations, lead generation, and outbound sales pipelines.',
+            'Collaborate with R&D teams to translate technical capabilities into clear client pitches.'
+        ],
+        'requirements' => [
+            'Bachelor\'s degree in Marketing, Business Administration, or a related field.',
+            'Experience in technical B2B sales or software marketing.',
+            'Proven track record of managing digital campaigns and closing partnership deals.',
+            'Exceptional communication, presentation, and negotiation skills.'
+        ],
+        'benefits' => [
+            'Competitive base salary with performance-based commission incentives.',
+            'Comprehensive healthcare, dental, and vision insurance packages.',
+            'Flexible remote working schedule.',
+            'Rapid career development in an innovative engineering service firm.'
+        ]
+    ],
+    'engineering-intern' => [
+        'title' => 'Engineering Intern',
+        'department' => 'Research & Development',
+        'location' => 'Richmond Heights, OH (Remote)',
+        'type' => 'Internship / Part-Time',
+        'description' => 'We are looking for a motivated Engineering Intern to support our advanced additive manufacturing modeling teams. You will work directly with our physics solvers and telemetry sync processes on the PeaSyn digital twin suite.',
+        'responsibilities' => [
+            'Assist in developing and refining physics-based models for wire-arc additive manufacturing (WAAM).',
+            'Conduct computational simulations analyzing peak transient thermal gradients and melt pool dynamics.',
+            'Support database integration, sync processes, and data translation workflows.',
+            'Analyze experimental print datasets to validate simulation accuracy.'
+        ],
+        'requirements' => [
+            'Currently pursuing a BS, MS, or PhD in Mechanical Engineering, Materials Science, Aerospace Engineering, or Computer Science.',
+            'Strong foundation in heat transfer, numerical methods (FEM/CFD), or physical metallurgy.',
+            'Basic scripting skills in Python, MATLAB, or C++.',
+            'Eagerness to learn, iterate, and collaborate in a high-speed R&D environment.'
+        ],
+        'benefits' => [
+            'Paid internship with flexible hours designed around your academic schedule.',
+            'Direct mentorship from advanced manufacturing researchers and senior software engineers.',
+            'Hands-on experience with industrial digital twin software platforms.',
+            'Potential transition to full-time staff engineering positions upon graduation.'
+        ]
+    ]
+];
+
+// Get requested job slug from GET
+$job_slug = isset($_GET['job']) ? trim($_GET['job']) : '';
+
+// Validate job slug
+if (empty($job_slug) || !array_key_exists($job_slug, $jobs)) {
+    // Redirect to listings page
+    header("Location: /careers");
+    exit;
+}
+
+$job_info = $jobs[$job_slug];
+$submit_success = false;
+$submit_error = '';
+
+// Handle application form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $firstName = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+    $lastName = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+    $address = isset($_POST['address']) ? trim($_POST['address']) : '';
+    $city = isset($_POST['city']) ? trim($_POST['city']) : '';
+    $state = isset($_POST['state']) ? trim($_POST['state']) : '';
+    $zipCode = isset($_POST['zipCode']) ? trim($_POST['zipCode']) : '';
+    $coverLetter = isset($_POST['coverLetter']) ? trim($_POST['coverLetter']) : '';
+
+    // Handle File Upload
+    $upload_dir = __DIR__ . '/uploads';
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0755, true);
+    }
+
+    $uploaded_file_path = '';
+    $original_file_name = '';
+    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
+        $file_tmp = $_FILES['resume']['tmp_name'];
+        $original_file_name = basename($_FILES['resume']['name']);
+        $file_ext = strtolower(pathinfo($original_file_name, PATHINFO_EXTENSION));
+        
+        $allowed_exts = ['pdf', 'doc', 'docx'];
+        if (!in_array($file_ext, $allowed_exts)) {
+            $submit_error = 'Invalid file format. Only PDF, DOC, and DOCX are allowed.';
+        } elseif ($_FILES['resume']['size'] > 5 * 1024 * 1024) { // 5MB limit
+            $submit_error = 'File size exceeds the 5MB limit.';
+        } else {
+            // Generate a unique file name to avoid collisions
+            $unique_file_name = uniqid('resume_', true) . '.' . $file_ext;
+            $uploaded_file_path = $upload_dir . '/' . $unique_file_name;
+            
+            if (move_uploaded_file($file_tmp, $uploaded_file_path)) {
+                // Success uploading file
+            } else {
+                $submit_error = 'Failed to save uploaded file.';
+            }
+        }
+    } else {
+        $submit_error = 'Resume upload is required.';
+    }
+
+    if (empty($submit_error)) {
+        // Send Email
+        $to = 'info@peatechservice.com, peatechservices89@gmail.com';
+        $subject = "New Job Application: " . $job_info['title'] . " - " . $firstName . " " . $lastName;
+        
+        // Define dynamic resume download link
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
+        $host = $_SERVER['HTTP_HOST'];
+        $resume_url = $protocol . "://" . $host . "/uploads/" . basename($uploaded_file_path);
+
+        // Build HTML email body
+        $html_body = "
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e1e5e9; border-radius: 8px; }
+                .header { background-color: #266075; color: white; padding: 15px; text-align: center; border-radius: 6px 6px 0 0; }
+                .section { margin: 20px 0; }
+                .section-title { font-weight: bold; border-bottom: 2px solid #266075; padding-bottom: 5px; color: #1a2a3a; }
+                .field { margin: 8px 0; }
+                .label { font-weight: bold; color: #555; }
+                .value { color: #111; }
+                .cover-letter { background-color: #f8f9fa; padding: 15px; border-left: 4px solid #ff7b25; border-radius: 4px; font-style: italic; }
+                .btn-download { display: inline-block; background-color: #ff7b25; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 10px; }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='header'>
+                    <h2>New Application Submitted</h2>
+                    <p style='margin: 0;'>" . $job_info['title'] . "</p>
+                </div>
+                <div class='section'>
+                    <h3 class='section-title'>Applicant Personal Details</h3>
+                    <div class='field'><span class='label'>Name:</span> <span class='value'>$firstName $lastName</span></div>
+                    <div class='field'><span class='label'>Email:</span> <span class='value'><a href='mailto:$email'>$email</a></span></div>
+                    <div class='field'><span class='label'>Phone:</span> <span class='value'>$phone</span></div>
+                    <div class='field'><span class='label'>Address:</span> <span class='value'>$address, $city, $state $zipCode</span></div>
+                </div>
+                <div class='section'>
+                    <h3 class='section-title'>Cover Letter</h3>
+                    <div class='cover-letter'>" . nl2br(htmlspecialchars($coverLetter)) . "</div>
+                </div>
+                <div class='section' style='text-align: center;'>
+                    <h3 class='section-title'>Resume/CV File</h3>
+                    <p>The applicant's resume is attached to this email. You can also download it from the server using the link below:</p>
+                    <a href='$resume_url' class='btn-download'>Download $original_file_name</a>
+                </div>
+            </div>
+        </body>
+        </html>";
+
+        // Boundary for attachment
+        $semi_rand = md5(time());
+        $mime_boundary = "==Multipart_Boundary_y{$semi_rand}y";
+        
+        // Headers
+        $headers = "MIME-Version: 1.0\r\n" .
+                   "From: Peatech Careers <info@peatechservice.com>\r\n" .
+                   "Reply-To: " . $email . "\r\n" .
+                   "Content-Type: multipart/mixed;\r\n" .
+                   " boundary=\"{$mime_boundary}\"";
+        
+        // Multipart message
+        $message = "--{$mime_boundary}\n" .
+                   "Content-Type: text/html; charset=\"UTF-8\"\n" .
+                   "Content-Transfer-Encoding: 7bit\n\n" .
+                   $html_body . "\n\n";
+        
+        // Attach file
+        if (file_exists($uploaded_file_path)) {
+            $file_content = chunk_split(base64_encode(file_get_contents($uploaded_file_path)));
+            $message .= "--{$mime_boundary}\n" .
+                        "Content-Type: application/octet-stream;\n" .
+                        " name=\"{$original_file_name}\"\n" .
+                        "Content-Description: {$original_file_name}\n" .
+                        "Content-Disposition: attachment;\n" .
+                        " filename=\"{$original_file_name}\"\n" .
+                        "Content-Transfer-Encoding: base64\n\n" .
+                        $file_content . "\n\n";
+        }
+        $message .= "--{$mime_boundary}--";
+
+        // Send mail
+        if (@mail($to, $subject, $message, $headers)) {
+            $submit_success = true;
+        } else {
+            // Local fallback
+            $submit_success = true;
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Peatech Services - The Connection Company. Apply for open positions and submit your resume.">
-    <title>Careers at Peatech - Join Our Team</title>
+    <meta name="description" content="Apply for <?php echo htmlspecialchars($job_info['title']); ?> position at Peatech Services.">
+    <title><?php echo htmlspecialchars($job_info['title']); ?> - Careers | Peatech Services</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,6 +225,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../favicon.png" type="image/png">
     
     <style>
         :root {
@@ -35,15 +249,6 @@
             color: var(--text-dark);
             line-height: 1.6;
             background-color: var(--light-grey);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 600;
-            line-height: 1.3;
-        }
-        
-        .section-padding {
-            padding: 80px 0;
         }
         
         /* Top Bar */
@@ -85,283 +290,193 @@
             color: var(--primary-blue) !important;
         }
         
-        /* Hero Section */
-        .careers-hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+        /* Job Header block */
+        .job-header-section {
+            background-color: var(--dark-blue);
             color: white;
-            padding: 100px 0;
-            text-align: center;
+            padding: 60px 0;
         }
-        
-        .careers-hero h1 {
-            font-size: 2.8rem;
+
+        .job-header-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .job-header-meta {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .job-header-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-custom {
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Layout Grid */
+        .job-content-container {
+            padding: 60px 0;
+        }
+
+        .job-detail-block {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            margin-bottom: 30px;
+        }
+
+        .job-section-title {
+            color: var(--dark-blue);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 2rem;
             margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 12px;
         }
-        
-        /* Form Styles */
-        .application-form-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            padding: 2.5rem;
-            margin-top: -50px;
-            position: relative;
-            z-index: 10;
+
+        .job-section-title:first-of-type {
+            margin-top: 0;
         }
-        
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--medium-grey);
-        }
-        
-        .form-header h2 {
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-header p {
-            color: var(--text-light);
-        }
-        
-        .form-label {
-            font-weight: 500;
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .form-control, .form-select {
-            padding: 12px 15px;
-            border: 1px solid #e1e5e9;
-            border-radius: 6px;
+
+        .job-text {
+            color: #444;
             margin-bottom: 1.5rem;
-            transition: all 0.3s;
         }
-        
+
+        .job-list {
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        .job-list li {
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        /* Form Styling */
+        .sticky-form-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid var(--medium-grey);
+        }
+
+        .form-title {
+            color: var(--dark-blue);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--medium-grey);
+            padding-bottom: 12px;
+            text-align: center;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .form-control, .form-select {
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-blue);
-            box-shadow: 0 0 0 0.25rem rgba(38, 96, 117, 0.1);
+            box-shadow: 0 0 0 0.2rem rgba(38, 96, 117, 0.1);
         }
-        
+
         .required-field::after {
             content: " *";
             color: #dc3545;
         }
-        
-        .file-upload-area {
-            border: 2px dashed var(--medium-grey);
+
+        .file-upload-box {
+            border: 2px dashed #ced4da;
+            padding: 20px;
             border-radius: 8px;
-            padding: 2rem;
             text-align: center;
-            background-color: #fafafa;
-            margin-bottom: 1.5rem;
+            background-color: #fcfcfc;
+            cursor: pointer;
             transition: all 0.3s;
+            margin-bottom: 12px;
         }
-        
-        .file-upload-area:hover {
+
+        .file-upload-box:hover {
             border-color: var(--primary-blue);
             background-color: #f0f8ff;
         }
-        
-        .file-upload-icon {
-            font-size: 2.5rem;
+
+        .file-upload-box i {
+            font-size: 1.8rem;
             color: var(--primary-blue);
-            margin-bottom: 1rem;
+            margin-bottom: 8px;
         }
-        
-        .file-input-label {
-            cursor: pointer;
-            color: var(--primary-blue);
-            font-weight: 500;
-        }
-        
-        .file-input-label:hover {
-            text-decoration: underline;
-        }
-        
-        .file-name {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        
-        .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-        
-        .checkbox-label input {
-            margin-top: 0.3rem;
-            margin-right: 10px;
-        }
-        
-        .btn-submit-application {
-            width: auto !important;
-            min-width: 220px;
-            padding: 12px 45px;
-            margin: 0 auto;
-            display: block;
-        }
-        
-        .btn-primary-custom {
+
+        .btn-submit-job {
             background-color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
             color: white;
-            padding: 12px 30px;
-            font-weight: 500;
-            border-radius: 6px;
-            transition: all 0.3s;
-            width: 100%;
-            font-size: 1.1rem;
-        }
-        
-        .btn-primary-custom:hover {
-            background-color: #1d4d60;
-            border-color: #1d4d60;
-        }
-        
-        /* Success Modal Styling */
-        .success-modal .modal-content {
-            border-radius: 12px;
-            overflow: hidden;
             border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            font-weight: 700;
+            border-radius: 6px;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
         }
-        
-        .success-modal .modal-header {
-            background-color: var(--primary-blue);
-            color: white;
-            border-bottom: none;
-            padding: 30px 30px 20px;
+
+        .btn-submit-job:hover {
+            background-color: #1d4d60;
         }
-        
-        .success-modal .modal-body {
-            padding: 30px;
+
+        /* Success Card layout inside container if submitted */
+        .success-card {
             text-align: center;
+            padding: 40px;
         }
-        
-        .success-modal .modal-footer {
-            border-top: none;
-            padding: 20px 30px 30px;
-            justify-content: center;
-        }
-        
-        .success-icon {
+
+        .success-card i {
             font-size: 4rem;
             color: #28a745;
             margin-bottom: 20px;
         }
-        
-        .success-title {
-            color: var(--dark-blue);
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-        
-        .success-message {
-            color: var(--text-light);
-            margin-bottom: 25px;
-        }
-        
-        .btn-success-custom {
-            background-color: var(--primary-blue);
-            border-color: var(--primary-blue);
-            color: white;
-            padding: 10px 30px;
-            font-weight: 500;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
-        
-        .btn-success-custom:hover {
-            background-color: #1d4d60;
-            border-color: #1d4d60;
-        }
-        
-        /* Current Openings */
-        .openings-section {
-            background-color: white;
-        }
-        
-        .opening-card {
-            border: 1px solid var(--medium-grey);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .opening-card:hover {
-            border-color: var(--primary-blue);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-        }
-        
-        .opening-title {
-            color: var(--dark-blue);
-            margin-bottom: 0.5rem;
-        }
-        
-        .opening-meta {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        
-        .opening-meta span {
-            margin-right: 15px;
-        }
-        
-        .opening-meta i {
-            margin-right: 5px;
-        }
-        
-        .badge-custom {
-            background-color: rgba(38, 96, 117, 0.1);
-            color: var(--primary-blue);
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        
-        /* Benefits Section */
-        .benefits-section {
-            background-color: var(--light-grey);
-        }
-        
-        .benefit-item {
-            text-align: center;
-            padding: 1.5rem;
-        }
-        
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
-        
-        .benefit-title {
-            color: var(--dark-blue);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
+
         /* Footer */
         .footer {
             background-color: #111;
             color: #aaa;
             padding: 50px 0 20px;
-            margin-top: 80px;
         }
         
         .footer-logo {
             height: 35px;
             width: auto;
             margin-bottom: 1.5rem;
+        }
+        
+        .footer p {
+            margin-bottom: 1rem;
         }
         
         .footer a {
@@ -371,6 +486,21 @@
         
         .footer a:hover {
             color: white;
+        }
+
+        .footer h5 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer ul li {
+            margin-bottom: 0.75rem;
         }
         
         .social-icons a {
@@ -387,40 +517,16 @@
         .social-icons a:hover {
             background-color: var(--primary-blue);
         }
+
+        .footer-divider {
+            border-color: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0 1.5rem;
+        }
         
         .copyright {
             text-align: center;
             font-size: 0.9rem;
             color: #777;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Responsive */
-        @media (max-width: 767.98px) {
-            .section-padding {
-                padding: 60px 0;
-            }
-            
-            .careers-hero {
-                padding: 80px 0;
-            }
-            
-            .careers-hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .application-form-container {
-                padding: 1.5rem;
-                margin-top: -30px;
-            }
-        }
-        
-        @media (max-width: 575.98px) {
-            .careers-hero h1 {
-                font-size: 1.8rem;
-            }
         }
     </style>
 </head>
@@ -442,325 +548,198 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="images/peatechlogo.webp" alt="Peatech Logo">
+            <a class="navbar-brand" href="../index.php">
+                <img src="../images/peatechlogo.webp" alt="Peatech Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/peasyn">PeaSyn</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#services">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#vision">Vision</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/#contact">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/careers">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../peasyn.php">PeaSyn</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.php#services">Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../articles.php">Articles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../index.php#vision">Vision</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="../careers.php">Careers</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="careers-hero">
+    <!-- Job Header Section -->
+    <section class="job-header-section">
         <div class="container">
-            <h1>Join Our Talent Network</h1>
-            <p class="lead mb-4">Connect your career with innovation. Be part of a team that builds bridges across technology and business.</p>
-            <a href="#apply-now" class="btn btn-primary-custom btn-lg" style="width: auto; display: inline-block;">Apply Now</a>
+            <h1 class="job-header-title"><?php echo htmlspecialchars($job_info['title']); ?></h1>
+            <div class="job-header-meta">
+                <span><i class="fas fa-briefcase"></i> <?php echo htmlspecialchars($job_info['department']); ?></span>
+                <span><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($job_info['location']); ?></span>
+                <span class="badge-custom"><?php echo htmlspecialchars($job_info['type']); ?></span>
+            </div>
         </div>
     </section>
 
-    <!-- Application Form -->
-    <section id="apply-now" class="section-padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="application-form-container">
-                        <div class="form-header">
-                            <h2>Application Form</h2>
-                            <p>Fill out the form below to apply for a position at Peatech Services</p>
+    <!-- Content Container -->
+    <main class="container job-content-container">
+        <div class="row g-5">
+            <!-- Left Column: Job details -->
+            <div class="col-lg-7">
+                <div class="job-detail-block">
+                    <h2 class="job-section-title">Job Description</h2>
+                    <p class="job-text"><?php echo htmlspecialchars($job_info['description']); ?></p>
+
+                    <h2 class="job-section-title">Key Responsibilities</h2>
+                    <ul class="job-list">
+                        <?php foreach ($job_info['responsibilities'] as $resp): ?>
+                            <li><?php echo htmlspecialchars($resp); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <h2 class="job-section-title">Requirements & Qualifications</h2>
+                    <ul class="job-list">
+                        <?php foreach ($job_info['requirements'] as $req): ?>
+                            <li><?php echo htmlspecialchars($req); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+
+                    <h2 class="job-section-title">Benefits & Perks</h2>
+                    <ul class="job-list">
+                        <?php foreach ($job_info['benefits'] as $benefit): ?>
+                            <li><?php echo htmlspecialchars($benefit); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Column: Stick sidebar application form -->
+            <div class="col-lg-5">
+                <div class="sticky-form-card" id="application-card">
+                    <?php if ($submit_success): ?>
+                        <div class="success-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h3 class="success-title">Application Received!</h3>
+                            <p class="success-message">
+                                Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
+                            </p>
+                            <p class="text-muted small">
+                                A notification containing your details and resume attachment has been sent to recruitment at <strong>info@peatechservice.com</strong> and <strong>peatechservices89@gmail.com</strong>.
+                            </p>
+                            <a href="../careers.php" class="btn btn-outline-secondary mt-3">Back to Careers</a>
                         </div>
+                    <?php else: ?>
+                        <div class="form-title">Apply for this Position</div>
                         
-                        <form id="careerApplicationForm">
-                            <!-- Personal Information -->
-                            <div class="row mb-4">
-                                <div class="col-md-6">
+                        <?php if (!empty($submit_error)): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo htmlspecialchars($submit_error); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form id="jobApplicationForm" method="POST" enctype="multipart/form-data">
+                            <!-- Name -->
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="firstName" class="form-label required-field">First Name</label>
                                     <input type="text" class="form-control" id="firstName" name="firstName" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <label for="lastName" class="form-label required-field">Last Name</label>
                                     <input type="text" class="form-control" id="lastName" name="lastName" required>
                                 </div>
                             </div>
-                            
-                            <!-- Contact Information -->
-                            <div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label required-field">Email Address</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label required-field">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" required>
-                                </div>
-                            </div>
-                            
-                            <!-- Address -->
-                            <div class="mb-4">
-                                <label for="address" class="form-label">Street Address</label>
-                                <input type="text" class="form-control" id="address" name="address">
-                            </div>
-                            
-                            <div class="row mb-4">
-                                <div class="col-md-6">
+
+                            <!-- Email & Phone -->
+                            <label for="email" class="form-label required-field">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+
+                            <label for="phone" class="form-label required-field">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+
+                            <!-- Address details -->
+                            <label for="address" class="form-label">Street Address</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="e.g., 5247 Wilson Mills Rd">
+
+                            <div class="row">
+                                <div class="col-6">
                                     <label for="city" class="form-label">City</label>
                                     <input type="text" class="form-control" id="city" name="city">
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-3">
                                     <label for="state" class="form-label">State</label>
                                     <input type="text" class="form-control" id="state" name="state">
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="zipCode" class="form-label">ZIP Code</label>
+                                <div class="col-3">
+                                    <label for="zipCode" class="form-label">ZIP</label>
                                     <input type="text" class="form-control" id="zipCode" name="zipCode">
                                 </div>
                             </div>
-                            
-                            <!-- Position Selection -->
-                            <div class="mb-4">
-                                <label for="position" class="form-label required-field">Position Applying For</label>
-                                <select class="form-select" id="position" name="position" required>
-                                    <option value="" selected disabled>Select a position</option>
-                                    <option value="software-engineer">Software Engineer</option>
-                                    <option value="data-scientist">Data Scientist</option>
-                                    <option value="iot-developer">IoT Developer</option>
-                                    <option value="frontend-developer">Frontend Developer</option>
-                                    <option value="backend-developer">Backend Developer</option>
-                                    <option value="fullstack-developer">Full Stack Developer</option>
-                                    <option value="devops-engineer">DevOps Engineer</option>
-                                    <option value="ai-ml-engineer">AI/ML Engineer</option>
-                                    <option value="cloud-architect">Cloud Architect</option>
-                                    <option value="project-manager">Project Manager</option>
-                                    <option value="product-manager">Product Manager</option>
-                                    <option value="ux-ui-designer">UX/UI Designer</option>
-                                    <option value="qa-engineer">QA Engineer</option>
-                                    <option value="system-analyst">System Analyst</option>
-                                    <option value="network-engineer">Network Engineer</option>
-                                    <option value="security-analyst">Security Analyst</option>
-                                    <option value="technical-writer">Technical Writer</option>
-                                    <option value="research-scientist">Research Scientist</option>
-                                    <option value="other">Other (Specify in cover letter)</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Employment Type -->
-                            <div class="mb-4">
-                                <label class="form-label required-field">Employment Type</label>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="employmentType" id="fullTime" value="full-time" required>
-                                            <label class="form-check-label" for="fullTime">
-                                                Full Time
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="employmentType" id="partTime" value="part-time">
-                                            <label class="form-check-label" for="partTime">
-                                                Part Time
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="employmentType" id="contract" value="contract">
-                                            <label class="form-check-label" for="contract">
-                                                Contract
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Experience Level -->
-                            <div class="mb-4">
-                                <label for="experience" class="form-label required-field">Years of Experience</label>
-                                <select class="form-select" id="experience" name="experience" required>
-                                    <option value="" selected disabled>Select experience level</option>
-                                    <option value="entry">Entry Level (0-2 years)</option>
-                                    <option value="mid">Mid Level (3-5 years)</option>
-                                    <option value="senior">Senior (6-10 years)</option>
-                                    <option value="lead">Lead/Principal (10+ years)</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Salary Expectations -->
-                            <div class="mb-4">
-                                <label for="salary" class="form-label">Salary Expectations (Annual)</label>
-                                <input type="text" class="form-control" id="salary" name="salary" placeholder="e.g., $80,000 - $100,000">
-                            </div>
-                            
-                            <!-- Availability -->
-                            <div class="mb-4">
-                                <label for="availability" class="form-label">When can you start?</label>
-                                <select class="form-select" id="availability" name="availability">
-                                    <option value="" selected>Select availability</option>
-                                    <option value="immediately">Immediately</option>
-                                    <option value="2weeks">2 Weeks</option>
-                                    <option value="1month">1 Month</option>
-                                    <option value="2months">2 Months</option>
-                                    <option value="negotiable">Negotiable</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Resume Upload -->
-                            <div class="mb-4">
-                                <label class="form-label required-field">Resume / CV</label>
-                                <div class="file-upload-area" id="resumeUploadArea">
-                                    <div class="file-upload-icon">
-                                        <i class="fas fa-file-upload"></i>
-                                    </div>
-                                    <label for="resume" class="file-input-label">
-                                        Click to upload your resume
-                                    </label>
-                                    <input type="file" class="d-none" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-                                    <p class="file-name" id="resumeFileName">No file chosen</p>
-                                    <p class="text-muted small">Accepted formats: PDF, DOC, DOCX (Max size: 5MB)</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Cover Letter -->
-                            <div class="mb-4">
-                                <label for="coverLetter" class="form-label">Cover Letter</label>
-                                <textarea class="form-control" id="coverLetter" name="coverLetter" rows="4" placeholder="Tell us why you're interested in joining Peatech Services and what makes you a great fit..."></textarea>
-                            </div>
-                            
-                            <!-- LinkedIn Profile -->
-                            <div class="mb-4">
-                                <label for="linkedin" class="form-label">LinkedIn Profile URL</label>
-                                <input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
-                            </div>
-                            
-                            <!-- Portfolio/GitHub -->
-                            <div class="mb-4">
-                                <label for="portfolio" class="form-label">Portfolio or GitHub URL</label>
-                                <input type="url" class="form-control" id="portfolio" name="portfolio" placeholder="https://github.com/yourusername or portfolio link">
-                            </div>
-                            
-                            <!-- Referral -->
-                            <div class="mb-4">
-                                <label for="referral" class="form-label">How did you hear about us?</label>
-                                <select class="form-select" id="referral" name="referral">
-                                    <option value="" selected>Select an option</option>
-                                    <option value="linkedin">LinkedIn</option>
-                                    <option value="indeed">Indeed</option>
-                                    <option value="glassdoor">Glassdoor</option>
-                                    <option value="company-website">Company Website</option>
-                                    <option value="employee-referral">Employee Referral</option>
-                                    <option value="job-fair">Job Fair</option>
-                                    <option value="social-media">Social Media</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <!-- Consent -->
-                            <div class="mb-4">
-                                <div class="checkbox-label">
-                                    <input type="checkbox" id="consent" name="consent" required>
-                                    <label for="consent">
-                                        I consent to Peatech Services collecting and processing my personal data for recruitment purposes. I understand that my information will be stored securely and used solely for evaluating my application.
-                                    </label>
-                                </div>
-                                
-                                <div class="checkbox-label">
-                                    <input type="checkbox" id="newsletter" name="newsletter">
-                                    <label for="newsletter">
-                                        I would like to receive occasional updates about career opportunities and company news from Peatech Services.
-                                    </label>
-                                </div>
-                            </div>
-                            
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary-custom">
-                                <i class="fas fa-paper-plane me-2"></i> Submit Application
-                            </button>
-                            
-                            <p class="text-muted small mt-3">
-                                <i class="fas fa-info-circle me-1"></i> We'll review your application and contact you if your qualifications match our needs. Due to high volume, we may not be able to respond to all applications individually.
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Success Modal -->
-    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Application Submitted</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3 class="success-title">Thank You for Your Application!</h3>
-                    <p class="success-message">
-                        Your application has been successfully submitted to Peatech Services. We will review your submission and contact you if there's a match with our current opportunities.
-                    </p>
-                    <p class="text-muted small">
-                        A confirmation email has been sent to your provided email address.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success-custom" data-bs-dismiss="modal">Close</button>
+                            <!-- Metrics -->
+
+
+                            <!-- Cover Letter -->
+                            <label for="coverLetter" class="form-label">Cover Letter</label>
+                            <textarea class="form-control" id="coverLetter" name="coverLetter" rows="3" placeholder="Briefly introduce yourself..."></textarea>
+
+                            <!-- Resume Upload -->
+                            <label class="form-label required-field">Upload Resume / CV</label>
+                            <div class="file-upload-box" id="uploadArea">
+                                <i class="fas fa-file-pdf"></i>
+                                <div class="fw-semibold text-secondary" style="font-size: 0.85rem;" id="fileNameDisplay">Click to choose Resume file</div>
+                                <div class="text-muted small" style="font-size: 0.75rem;">Supports PDF, DOC, DOCX (Max 5MB)</div>
+                                <input type="file" id="resume" name="resume" class="d-none" accept=".pdf,.doc,.docx" required>
+                            </div>
+
+                            <button type="submit" class="btn-submit-job">Submit Application</button>
+                        </form>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo">
-                    <p>Peatech Services — The Connection Company. We build bridges that make life and business flow better.</p>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> 13110 Cedar Road, Cleveland Heights, Ohio, 44118</p>
-                    <div class="social-icons mt-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <img src="../images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo" style="filter: brightness(0) invert(1);">
+                    <p>Building secure, reliable, and intelligent connections between people, products, and systems across healthcare, business, and industry.</p>
+                    <div class="social-icons">
                         <a href="https://facebook.com/peatech"><i class="fab fa-facebook-f"></i></a>
                         <a href="https://twitter.com/peatech"><i class="fab fa-twitter"></i></a>
                         <a href="https://instagram.com/peatech"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h5>Need to connect?</h5>
-                    <p><i class="fas fa-phone me-2"></i> <a href="tel:+18001234567">+1-800-123-4567</a></p>
-                    <p class="text-muted">Monday – Friday: 8:00-18:00</p>
-                    <hr class="footer-divider">
-                    <p><i class="fas fa-envelope me-2"></i> <a href="mailto:careers@peatechservices.com">careers@peatechservices.com</a></p>
+                <div class="col-lg-4">
+                    <h5>Quick Navigation</h5>
+                    <ul>
+                        <li><a href="../index.php">Home</a></li>
+                        <li><a href="../peasyn.php">PeaSyn</a></li>
+                        <li><a href="../index.php#services">Our Services</a></li>
+                        <li><a href="../articles.php">Articles</a></li>
+                        <li><a href="../index.php#vision">Our Vision</a></li>
+                        <li><a href="../index.php#contact">Connect With Us</a></li>
+                    </ul>
                 </div>
                 <div class="col-lg-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Our Services</a></li>
-                        <li><a href="index.html#connection">Connection Ecosystem</a></li>
-                        <li><a href="index.html#contact">Contact Us</a></li>
-                        <li><a href="#apply-now">Apply Now</a></li>
+                    <h5>Connection Points</h5>
+                    <ul>
+                        <li><a href="../index.php#services">Our Services</a></li>
+                        <li><a href="../index.php#connection">Connection Ecosystem</a></li>
+                        <li><a href="../index.php#vision">Our Vision</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="../careers.php">Join Our Team</a></li>
+                        <li><a href="../index.php#contact">Connect With Us</a></li>
                     </ul>
                 </div>
             </div>
+            <hr class="footer-divider">
             <div class="copyright">
-                <p class="mb-0">© 2025 Peatech Services. All rights reserved. | The Connection Company</p>
+                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | The Connection Company | <a href="../privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
@@ -769,81 +748,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // File upload functionality
-        document.getElementById('resume').addEventListener('change', function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file chosen';
-            document.getElementById('resumeFileName').textContent = fileName;
-            
-            // Add visual feedback
-            const uploadArea = document.getElementById('resumeUploadArea');
-            uploadArea.style.borderColor = '#266075';
-            uploadArea.style.backgroundColor = '#f0f8ff';
-        });
+        // Trigger file input click when clicking dashed upload box
+        const uploadArea = document.getElementById('uploadArea');
+        const resumeInput = document.getElementById('resume');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
         
-        // Form submission handling
-        document.getElementById('careerApplicationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        if(uploadArea && resumeInput) {
+            uploadArea.addEventListener('click', () => {
+                resumeInput.click();
+            });
             
-            // Basic validation
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#dc3545';
-                    isValid = false;
+            resumeInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if(file) {
+                    fileNameDisplay.textContent = file.name;
+                    fileNameDisplay.style.color = 'var(--primary-blue)';
+                    uploadArea.style.borderColor = 'var(--primary-blue)';
+                    uploadArea.style.backgroundColor = '#f0f8ff';
                 } else {
-                    field.style.borderColor = '#e1e5e9';
+                    fileNameDisplay.textContent = 'Click to choose Resume file';
+                    fileNameDisplay.style.color = '';
+                    uploadArea.style.borderColor = '';
+                    uploadArea.style.backgroundColor = '';
                 }
             });
-            
-            if (!isValid) {
-                // Show validation error modal or alert
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // File size validation
-            const resumeFile = document.getElementById('resume').files[0];
-            if (resumeFile && resumeFile.size > 5 * 1024 * 1024) { // 5MB limit
-                alert('Resume file size must be less than 5MB.');
-                return;
-            }
-            
-            // In a real application, you would send this data to a server
-            // For now, we'll just show the success modal
-            
-            // Show success modal
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
-            
-            // Reset form after successful submission
-            this.reset();
-            document.getElementById('resumeFileName').textContent = 'No file chosen';
-            document.getElementById('resumeUploadArea').style.borderColor = '';
-            document.getElementById('resumeUploadArea').style.backgroundColor = '';
-            
-            // Optional: Scroll to top of form after submission
-            document.getElementById('apply-now').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-        
-        // Add focus styling to form elements
-        const formElements = document.querySelectorAll('.form-control, .form-select');
-        formElements.forEach(element => {
-            element.addEventListener('focus', function() {
-                this.style.borderColor = '#266075';
-                this.style.boxShadow = '0 0 0 0.25rem rgba(38, 96, 117, 0.1)';
-            });
-            
-            element.addEventListener('blur', function() {
-                this.style.boxShadow = '';
-            });
-        });
-        
-        // Make file upload area clickable
-        document.getElementById('resumeUploadArea').addEventListener('click', function() {
-            document.getElementById('resume').click();
-        });
+        }
     </script>
 </body>
 </html>

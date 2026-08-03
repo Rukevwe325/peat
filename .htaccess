@@ -16,6 +16,7 @@ RewriteRule ^peasyn$ peasyn.php [L,QSA]
 
 # SECOND: Handle article URLs (article/slug)
 RewriteRule ^article/([^/]+)$ article.php?slug=$1 [L,QSA]
+RewriteRule ^career/([^/]+)$ career.php?job=$1 [L,QSA]
 
 # THIRD: Remove .php extension from ALL OTHER pages
 RewriteCond %{REQUEST_FILENAME} !-d

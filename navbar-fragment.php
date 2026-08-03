@@ -11,6 +11,7 @@
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/peasyn">PeaSyn</a></li>
                 <li class="nav-item"><a class="nav-link" href="/articles">Articles</a></li>
+                <li class="nav-item"><a class="nav-link" href="/careers">Careers</a></li>
                 
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <li class="nav-item"><a class="nav-link" href="/post-article"><i class="fas fa-pen-alt"></i> Write</a></li>

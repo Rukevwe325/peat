@@ -20,6 +20,12 @@ if (preg_match('#^/article/([^/]+)$#', $path, $matches)) {
     require_once __DIR__ . '/article.php';
     return;
 }
+// Match /career/{job} -> career.php?job={job}
+if (preg_match('#^/career/([^/]+)$#', $path, $matches)) {
+    $_GET['job'] = $matches[1];
+    require_once __DIR__ . '/career.php';
+    return;
+}
 
 // 3. Fallback routing for extensionless PHP files
 // E.g., /peasyn -> peasyn.php, /articles -> articles.php

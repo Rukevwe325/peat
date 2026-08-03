@@ -946,6 +946,7 @@
                     <li class="nav-item"><a class="nav-link" href="index.php#services">Our Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php#vision">Vision</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.php">Careers</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php#contact">Contact Us</a></li>
                 </ul>
             </div>
