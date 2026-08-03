@@ -370,7 +370,7 @@
                         <h3 class="opening-title">Sales/Marketing Specialist</h3>
                         <div class="opening-meta">
                             <span><i class="fas fa-briefcase"></i> Sales & Marketing</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (Remote)</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
                             <span class="badge-custom">Full-Time</span>
                         </div>
                         <p class="opening-desc">Drive customer outreach, manage B2B pipelines, packaging complex digital twins and physics simulation solutions into impactful brand campaigns, and coordinate partnership strategies.</p>
@@ -384,7 +384,7 @@
                         <h3 class="opening-title">Engineering Intern</h3>
                         <div class="opening-meta">
                             <span><i class="fas fa-briefcase"></i> Research & Development</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (Remote)</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
                             <span class="badge-custom">Internship</span>
                         </div>
                         <p class="opening-desc">Work with modeling algorithms and telemetry data translation processes on our PeaSyn digital twin simulation suite. Assist in simulating thermal gradients and melt pool dynamics.</p>

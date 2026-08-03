@@ -9,7 +9,7 @@ $jobs = [
     'sales-marketing-specialist' => [
         'title' => 'Sales/Marketing Specialist',
         'department' => 'Sales & Marketing',
-        'location' => 'Richmond Heights, OH (Remote)',
+        'location' => 'Richmond Heights, OH (On-Site)',
         'type' => 'Full-Time',
         'description' => 'We are seeking a dynamic Sales/Marketing Specialist to lead our B2B outreach campaigns, promote Peatech\'s connectivity services, manage customer relationships, and expand strategic market share.',
         'responsibilities' => [
@@ -27,14 +27,14 @@ $jobs = [
         'benefits' => [
             'Competitive base salary with performance-based commission incentives.',
             'Comprehensive healthcare, dental, and vision insurance packages.',
-            'Flexible remote working schedule.',
+            'Flexible working schedule.',
             'Rapid career development in an innovative engineering service firm.'
         ]
     ],
     'engineering-intern' => [
         'title' => 'Engineering Intern',
         'department' => 'Research & Development',
-        'location' => 'Richmond Heights, OH (Remote)',
+        'location' => 'Richmond Heights, OH (On-Site)',
         'type' => 'Internship / Part-Time',
         'description' => 'We are looking for a motivated Engineering Intern to support our advanced additive manufacturing modeling teams. You will work directly with our physics solvers and telemetry sync processes on the PeaSyn digital twin suite.',
         'responsibilities' => [
