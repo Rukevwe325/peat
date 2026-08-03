@@ -616,19 +616,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Right Column: Stick sidebar application form -->
             <div class="col-lg-5">
                 <div class="sticky-form-card" id="application-card">
-                    <?php if ($submit_success): ?>
-                        <div class="success-card">
-                            <i class="fas fa-check-circle"></i>
-                            <h3 class="success-title">Application Received!</h3>
-                            <p class="success-message">
-                                Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
-                            </p>
-                            <p class="text-muted small">
-                                A notification containing your details and resume attachment has been sent to recruitment at <strong>info@peatechservice.com</strong> and <strong>peatechservices89@gmail.com</strong>.
-                            </p>
-                            <a href="../careers.php" class="btn btn-outline-secondary mt-3">Back to Careers</a>
-                        </div>
-                    <?php else: ?>
+                     <?php if ($submit_success): ?>
+                         <div class="success-card">
+                             <i class="fas fa-check-circle"></i>
+                             <h3 class="success-title">Application Received!</h3>
+                             <p class="success-message">
+                                 Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
+                             </p>
+                             <a href="../careers.php" class="btn btn-outline-secondary mt-3">Back to Careers</a>
+                         </div>
+                     <?php else: ?>
                         <div class="form-title">Apply for this Position</div>
                         
                         <?php if (!empty($submit_error)): ?>
@@ -637,63 +634,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         <?php endif; ?>
 
-                        <form id="jobApplicationForm" method="POST" enctype="multipart/form-data">
-                            <!-- Name -->
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="firstName" class="form-label required-field">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="col-6">
-                                    <label for="lastName" class="form-label required-field">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                </div>
-                            </div>
+                         <form id="jobApplicationForm" class="needs-validation" method="POST" enctype="multipart/form-data" novalidate>
+                             <!-- Name -->
+                             <div class="row">
+                                 <div class="col-6">
+                                     <label for="firstName" class="form-label required-field">First Name</label>
+                                     <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                     <div class="invalid-feedback">First name is required.</div>
+                                 </div>
+                                 <div class="col-6">
+                                     <label for="lastName" class="form-label required-field">Last Name</label>
+                                     <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                     <div class="invalid-feedback">Last name is required.</div>
+                                 </div>
+                             </div>
 
-                            <!-- Email & Phone -->
-                            <label for="email" class="form-label required-field">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                             <!-- Email & Phone -->
+                             <div class="mt-3">
+                                 <label for="email" class="form-label required-field">Email Address</label>
+                                 <input type="email" class="form-control" id="email" name="email" required>
+                                 <div class="invalid-feedback">Please enter a valid email address (e.g., name@example.com).</div>
+                             </div>
 
-                            <label for="phone" class="form-label required-field">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                             <div class="mt-3">
+                                 <label for="phone" class="form-label required-field">Phone Number</label>
+                                 <input type="tel" class="form-control" id="phone" name="phone" required>
+                                 <div class="invalid-feedback">Phone number is required.</div>
+                             </div>
 
-                            <!-- Address details -->
-                            <label for="address" class="form-label">Street Address</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="e.g., 5247 Wilson Mills Rd">
+                             <!-- Address details -->
+                             <div class="mt-3">
+                                 <label for="address" class="form-label">Street Address</label>
+                                 <input type="text" class="form-control" id="address" name="address" placeholder="e.g., 5247 Wilson Mills Rd">
+                             </div>
 
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city">
-                                </div>
-                                <div class="col-3">
-                                    <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" name="state">
-                                </div>
-                                <div class="col-3">
-                                    <label for="zipCode" class="form-label">ZIP</label>
-                                    <input type="text" class="form-control" id="zipCode" name="zipCode">
-                                </div>
-                            </div>
+                             <div class="row mt-3">
+                                 <div class="col-6">
+                                     <label for="city" class="form-label">City</label>
+                                     <input type="text" class="form-control" id="city" name="city">
+                                 </div>
+                                 <div class="col-3">
+                                     <label for="state" class="form-label">State</label>
+                                     <input type="text" class="form-control" id="state" name="state">
+                                 </div>
+                                 <div class="col-3">
+                                     <label for="zipCode" class="form-label">ZIP</label>
+                                     <input type="text" class="form-control" id="zipCode" name="zipCode">
+                                 </div>
+                             </div>
 
-                            <!-- Metrics -->
+                             <!-- Metrics -->
 
 
-                            <!-- Cover Letter -->
-                            <label for="coverLetter" class="form-label">Cover Letter</label>
-                            <textarea class="form-control" id="coverLetter" name="coverLetter" rows="3" placeholder="Briefly introduce yourself..."></textarea>
+                             <!-- Cover Letter -->
+                             <div class="mt-3">
+                                 <label for="coverLetter" class="form-label">Cover Letter</label>
+                                 <textarea class="form-control" id="coverLetter" name="coverLetter" rows="3" placeholder="Briefly introduce yourself..."></textarea>
+                             </div>
 
-                            <!-- Resume Upload -->
-                            <label class="form-label required-field">Upload Resume / CV</label>
-                            <div class="file-upload-box" id="uploadArea">
-                                <i class="fas fa-file-pdf"></i>
-                                <div class="fw-semibold text-secondary" style="font-size: 0.85rem;" id="fileNameDisplay">Click to choose Resume file</div>
-                                <div class="text-muted small" style="font-size: 0.75rem;">Supports PDF, DOC, DOCX (Max 5MB)</div>
-                                <input type="file" id="resume" name="resume" class="d-none" accept=".pdf,.doc,.docx" required>
-                            </div>
+                             <!-- Resume Upload -->
+                             <div class="mt-3">
+                                 <label class="form-label required-field">Upload Resume / CV</label>
+                                 <div class="file-upload-box" id="uploadArea">
+                                     <i class="fas fa-file-pdf"></i>
+                                     <div class="fw-semibold text-secondary" style="font-size: 0.85rem;" id="fileNameDisplay">Click to choose Resume file</div>
+                                     <div class="text-muted small" style="font-size: 0.75rem;">Supports PDF, DOC, DOCX (Max 5MB)</div>
+                                     <input type="file" id="resume" name="resume" class="d-none" accept=".pdf,.doc,.docx" required>
+                                 </div>
+                                 <div class="invalid-feedback text-center mt-2" id="resumeFeedback" style="display: none;">Please choose and upload your resume file.</div>
+                             </div>
 
-                            <button type="submit" class="btn-submit-job">Submit Application</button>
-                        </form>
+                             <button type="submit" class="btn-submit-job">Submit Application</button>
+                         </form>
                     <?php endif; ?>
                 </div>
             </div>
@@ -752,6 +764,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         const uploadArea = document.getElementById('uploadArea');
         const resumeInput = document.getElementById('resume');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
+        const resumeFeedback = document.getElementById('resumeFeedback');
+        const form = document.getElementById('jobApplicationForm');
         
         if(uploadArea && resumeInput) {
             uploadArea.addEventListener('click', () => {
@@ -765,6 +779,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     fileNameDisplay.style.color = 'var(--primary-blue)';
                     uploadArea.style.borderColor = 'var(--primary-blue)';
                     uploadArea.style.backgroundColor = '#f0f8ff';
+                    if(resumeFeedback) resumeFeedback.style.display = 'none';
                 } else {
                     fileNameDisplay.textContent = 'Click to choose Resume file';
                     fileNameDisplay.style.color = '';
@@ -772,6 +787,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     uploadArea.style.backgroundColor = '';
                 }
             });
+        }
+
+        if(form) {
+            form.addEventListener('submit', function(event) {
+                let isValid = true;
+                
+                // Custom validation for file input
+                if (!resumeInput.files || resumeInput.files.length === 0) {
+                    isValid = false;
+                    if(resumeFeedback) {
+                        resumeFeedback.style.display = 'block';
+                        resumeFeedback.style.color = '#dc3545';
+                    }
+                    uploadArea.style.borderColor = '#dc3545';
+                    uploadArea.style.backgroundColor = '#fff8f8';
+                }
+                
+                if (!form.checkValidity() || !isValid) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    // Highlight custom validation styles
+                    form.classList.add('was-validated');
+                    
+                    // Scroll to first invalid field
+                    const firstInvalid = form.querySelector(':invalid');
+                    if (firstInvalid) {
+                        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstInvalid.focus();
+                    }
+                }
+            }, false);
         }
     </script>
 </body>
