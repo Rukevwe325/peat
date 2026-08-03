@@ -625,6 +625,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                              </p>
                              <a href="../careers.php" class="btn btn-outline-secondary mt-3">Back to Careers</a>
                          </div>
+
+                         <!-- Success Modal Popup -->
+                         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static">
+                             <div class="modal-dialog modal-dialog-centered">
+                                 <div class="modal-content" style="border: none; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                                     <div class="modal-body text-center p-5">
+                                         <div style="font-size: 4.5rem; color: #266075; margin-bottom: 20px;">
+                                             <i class="fas fa-check-circle"></i>
+                                         </div>
+                                         <h3 class="modal-title mb-3" id="successModalLabel" style="font-weight: 700; color: #1a2a3a;">Application Received!</h3>
+                                         <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.6;">
+                                             Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
+                                         </p>
+                                         <a href="../careers.php" class="btn btn-primary px-4 py-2" style="background-color: #266075; border: none; font-weight: 600; border-radius: 6px;">Back to Careers</a>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <script>
+                             document.addEventListener('DOMContentLoaded', function() {
+                                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                                 successModal.show();
+                             });
+                         </script>
                      <?php else: ?>
                         <div class="form-title">Apply for this Position</div>
                         
