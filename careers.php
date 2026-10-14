@@ -379,6 +379,19 @@
                     </div>
                 </div>
 
+                <!-- Smart System Engineer -->
+                <div class="col-md-6">
+                    <div class="opening-card">
+                        <h3 class="opening-title">Smart System Engineer</h3>
+                        <div class="opening-meta">
+                            <span><i class="fas fa-briefcase"></i> Engineering &amp; Systems Integration</span>
+                            <span class="badge-custom">Full-Time</span>
+                        </div>
+                        <p class="opening-desc">Design and integrate intelligent systems connecting sensors, IoT devices, software, and automation. Build reliable solutions for monitoring, control, and data-driven decisions.</p>
+                        <a href="career/smart-system-engineer" class="btn-view-job">View Job &amp; Apply</a>
+                    </div>
+                </div>
+
                 <!-- Engineering Intern -->
                 <div class="col-md-6">
                     <div class="opening-card">
@@ -386,7 +399,7 @@
                         <div class="opening-meta">
                             <span><i class="fas fa-briefcase"></i> Research & Development</span>
                             <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
-                            <span class="badge-custom">Internship</span>
+                            <span class="badge-custom">Internship / Part-Time</span>
                         </div>
                         <p class="opening-desc">Work with modeling algorithms and telemetry data translation processes on our PeaSyn digital twin simulation suite. Assist in simulating thermal gradients and melt pool dynamics.</p>
                         <a href="career/engineering-intern" class="btn-view-job">View Job & Apply</a>
