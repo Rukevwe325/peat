@@ -10,22 +10,26 @@ Options -Indexes
     Deny from all
 </Files>
 
-# FIRST: Handle specific pages (articles listing)
+# FIRST: Handle specific pages (articles listing, peasyn, apply-operations)
 RewriteRule ^articles$ articles.php [L,QSA]
 RewriteRule ^peasyn$ peasyn.php [L,QSA]
+RewriteRule ^apply-operations/?$ apply-operations.php [L,QSA]
 
-# SECOND: Handle article URLs (article/slug)
-RewriteRule ^article/([^/]+)$ article.php?slug=$1 [L,QSA]
-RewriteRule ^career/([^/]+)$ career.php?job=$1 [L,QSA]
+# SECOND: Handle article and career URLs (supports optional trailing slash)
+RewriteRule ^article/([^/]+)/?$ article.php?slug=$1 [L,QSA]
+RewriteRule ^career/([^/]+)/?$ career.php?job=$1 [L,QSA]
 
 # THIRD: Remove .php extension from ALL OTHER pages
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^([^/]+)/?$ $1.php [L,QSA]
 
-# Redirect old article.php?slug= URLs to new clean URLs
+# Redirect old article.php?slug= and career.php?job= URLs to clean URLs
 RewriteCond %{THE_REQUEST} /article\.php\?slug=([^\s&]+) [NC]
 RewriteRule ^ /article/%1? [L,R=301]
+
+RewriteCond %{THE_REQUEST} /career\.php\?job=([^\s&]+) [NC]
+RewriteRule ^ /career/%1? [L,R=301]
 
 # Custom error pages
 ErrorDocument 404 /error-404.php

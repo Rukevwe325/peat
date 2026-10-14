@@ -795,13 +795,14 @@
     <div class="top-bar">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>
-                </div>
+                <!--<div class="col-md-6 text-center text-md-start">-->
+                <!--    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>-->
+                <!--</div>-->
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="https://facebook.com/peatech" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/peatech" class="mx-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2"><i class="fab fa-facebook-f"></i></a>
+                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
+                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -1441,7 +1442,7 @@
                 </div>
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <h5>Need to connect?</h5>
-                    <p><i class="fas fa-phone me-2"></i> <a href="tel:+18001234567">+1-800-123-4567</a></p>
+                    <!--<p><i class="fas fa-phone me-2"></i> <a href="tel:+18001234567">+1-800-123-4567</a></p>-->
                     <p class="text-muted">Monday - Friday: 8:00-18:00<br>Saturday: 9:00 - 14:00</p>
                     <hr class="footer-divider">
                     <p><i class="fas fa-envelope me-2"></i> <a href="mailto:info@peatechservice.com">info@peatechservice.com</a></p>

@@ -1,16 +1,89 @@
 <?php
 /**
  * career.php
- * Job Posting Details and Application Form page.
+ * Job Posting Details page.
  */
 
-// Define the jobs array
+// Define the coordinator job details
+$coordinator_job = [
+    'title' => 'Operations and Executive Support Coordinators (Two Positions)',
+    'department' => 'Operations & Executive Support',
+    'location' => 'Richmond Heights, OH (Hybrid / Remote Available)',
+    'type' => 'Full-Time (Two Positions)',
+    'apply_url' => '/apply-operations',
+    'roles' => [
+        'Operations Coordinator' => 'Operations Coordinator (Peatech Operations & Team Reporting)',
+        'Executive Support Coordinator' => 'Executive Support Coordinator (Peatech Executive Support)',
+        'Open to Either Role' => 'Open to Either Role (Both Positions)'
+    ],
+    'description' => 'Peatech is hiring two coordinators to support Peatech’s operations and executive day-to-day priorities. Each coordinator will own assigned areas and provide backup for the other.',
+    'responsibilities' => [
+        'Property operations' => [
+            'Monitor reservations across all listing platforms and keep calendars synchronized to prevent double bookings.',
+            'Respond to guest inquiries and concerns promptly, escalating issues that need management attention.',
+            'Keep approved property listings accurate and complete, including photos, descriptions, amenities, and availability.',
+            'Track cleaning, maintenance, guest requests, and other property tasks through completion.'
+        ],
+        'Remote team reporting and performance' => [
+            'Review each associate’s weekly report in the company drive and follow up on missing or incomplete reports.',
+            'Compare reported work with assigned tickets, submitted files, agreed milestones, and other available evidence.',
+            'Maintain a performance tracker covering deliverables completed, deadlines met, work awaiting review, unresolved blockers, and follow-up actions.',
+            'Request confirmation from the appropriate project lead before marking technical work as accepted.',
+            'Prepare a payment review summary showing agreed compensation, approved milestone or performance payments, and any items requiring management review. Management makes the final payment decision.'
+        ],
+        'Peatech operations and executive support' => [
+            'Maintain a company-wide action tracker with owners, deadlines, and status updates; follow up until open items are resolved.',
+            'Turn meeting decisions into tickets and confirm they are assigned to the right people.',
+            'Organize expenses, receipts, invoices, and supporting records so they are ready for accounting and tax preparation.',
+            'Maintain an inventory of company assets and help gather records for valuation and patent applications.',
+            'Manage executive meeting calendars and send timely reminders.'
+        ],
+        'Marketing and communications' => [
+            'Coordinate corporate documentation and follow-ups with professional advisers, while keeping organizational documents complete and organized.',
+            'Help promote company initiatives, announcements, and social media channels.',
+            'Support the marketing team with campaign coordination, content schedules, and follow-up tasks.'
+        ],
+        'Additional responsibilities' => [
+            'Create simple checklists and procedures for recurring work, including weekly reporting, guest responses, expense submission, and meeting follow-up.',
+            'Track contract renewals, subscriptions, filing deadlines, and other important dates.',
+            'Help onboard new associates by confirming they have their assignments, reporting templates, and appropriate access.',
+            'Produce a concise weekly management dashboard showing property issues, project progress, overdue tasks, missing records, and decisions needed from leadership.'
+        ]
+    ],
+    'requirements' => [
+        'Handle company, worker, financial, and guest information confidentially and flag urgent issues promptly.',
+        'Strong organizational, multi-tasking, and follow-up skills with rigorous attention to detail.',
+        'Experience with online booking/calendar management, document control (Google Drive/Sheets), and operational trackers.',
+        'Ability to review weekly associate reports, cross-reference tickets and deliverables, and prepare executive summaries.',
+        'High level of accountability, professional communication, and ability to handle sensitive executive matters.'
+    ],
+    'benefits' => [
+        'Competitive compensation with performance milestones and regular review.',
+        'Comprehensive exposure across expanding operations at Peatech.',
+        'Flexible working arrangement with direct mentorship from leadership.',
+        'Structured procedures and templates with opportunities for career growth.'
+    ]
+];
+
+// Define all available jobs and aliases
 $jobs = [
+    // Primary new job with various slug aliases
+    'operations-and-executive-support-coordinators' => $coordinator_job,
+    'operations-executive-support-coordinators'     => $coordinator_job,
+    'operations-coordinator'                         => $coordinator_job,
+    'executive-support-coordinator'                 => $coordinator_job,
+    'coordinators'                                   => $coordinator_job,
+    'coordinator'                                    => $coordinator_job,
+
+    // Existing jobs retained
     'sales-marketing-specialist' => [
         'title' => 'Sales/Marketing Specialist',
         'department' => 'Sales & Marketing',
-        'location' => 'Richmond Heights, OH (Remote)',
+        'location' => 'Richmond Heights, OH (On-Site)',
         'type' => 'Full-Time',
+        'roles' => [
+            'Sales/Marketing Specialist' => 'Sales/Marketing Specialist'
+        ],
         'description' => 'We are seeking a dynamic Sales/Marketing Specialist to lead our B2B outreach campaigns, promote Peatech\'s connectivity services, manage customer relationships, and expand strategic market share.',
         'responsibilities' => [
             'Develop and implement B2B sales strategies to acquire enterprise clients.',
@@ -27,15 +100,18 @@ $jobs = [
         'benefits' => [
             'Competitive base salary with performance-based commission incentives.',
             'Comprehensive healthcare, dental, and vision insurance packages.',
-            'Flexible remote working schedule.',
+            'Flexible working schedule.',
             'Rapid career development in an innovative engineering service firm.'
         ]
     ],
     'engineering-intern' => [
         'title' => 'Engineering Intern',
         'department' => 'Research & Development',
-        'location' => 'Richmond Heights, OH (Remote)',
+        'location' => 'Richmond Heights, OH (On-Site)',
         'type' => 'Internship / Part-Time',
+        'roles' => [
+            'Engineering Intern' => 'Engineering Intern'
+        ],
         'description' => 'We are looking for a motivated Engineering Intern to support our advanced additive manufacturing modeling teams. You will work directly with our physics solvers and telemetry sync processes on the PeaSyn digital twin suite.',
         'responsibilities' => [
             'Assist in developing and refining physics-based models for wire-arc additive manufacturing (WAAM).',
@@ -61,9 +137,14 @@ $jobs = [
 // Get requested job slug from GET
 $job_slug = isset($_GET['job']) ? trim($_GET['job']) : '';
 
+// Default fallback to the primary coordinators posting if no slug is provided
+$default_slug = 'operations-and-executive-support-coordinators';
+if (empty($job_slug)) {
+    $job_slug = $default_slug;
+}
+
 // Validate job slug
-if (empty($job_slug) || !array_key_exists($job_slug, $jobs)) {
-    // Redirect to listings page
+if (!array_key_exists($job_slug, $jobs)) {
     header("Location: /careers");
     exit;
 }
@@ -72,19 +153,34 @@ $job_info = $jobs[$job_slug];
 $submit_success = false;
 $submit_error = '';
 
-// Handle application form submission
+$firstName = '';
+$lastName = '';
+$email = '';
+$phone = '';
+$appliedRole = '';
+$address = '';
+$city = '';
+$state = '';
+$zipCode = '';
+$coverLetter = '';
+
+// Handle embedded application form submission if used
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $firstName = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
-    $lastName = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
-    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-    $phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
-    $address = isset($_POST['address']) ? trim($_POST['address']) : '';
-    $city = isset($_POST['city']) ? trim($_POST['city']) : '';
-    $state = isset($_POST['state']) ? trim($_POST['state']) : '';
-    $zipCode = isset($_POST['zipCode']) ? trim($_POST['zipCode']) : '';
+    $firstName   = isset($_POST['firstName']) ? trim($_POST['firstName']) : '';
+    $lastName    = isset($_POST['lastName']) ? trim($_POST['lastName']) : '';
+    $email       = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $phone       = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+    $appliedRole = isset($_POST['appliedRole']) ? trim($_POST['appliedRole']) : '';
+    $address     = isset($_POST['address']) ? trim($_POST['address']) : '';
+    $city        = isset($_POST['city']) ? trim($_POST['city']) : '';
+    $state       = isset($_POST['state']) ? trim($_POST['state']) : '';
+    $zipCode     = isset($_POST['zipCode']) ? trim($_POST['zipCode']) : '';
     $coverLetter = isset($_POST['coverLetter']) ? trim($_POST['coverLetter']) : '';
 
-    // Handle File Upload
+    if (!empty($job_info['roles']) && count($job_info['roles']) > 1 && empty($appliedRole)) {
+        $submit_error = 'Please select the role you are applying for.';
+    }
+
     $upload_dir = __DIR__ . '/uploads';
     if (!file_exists($upload_dir)) {
         mkdir($upload_dir, 0755, true);
@@ -92,42 +188,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $uploaded_file_path = '';
     $original_file_name = '';
-    if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
-        $file_tmp = $_FILES['resume']['tmp_name'];
-        $original_file_name = basename($_FILES['resume']['name']);
-        $file_ext = strtolower(pathinfo($original_file_name, PATHINFO_EXTENSION));
-        
-        $allowed_exts = ['pdf', 'doc', 'docx'];
-        if (!in_array($file_ext, $allowed_exts)) {
-            $submit_error = 'Invalid file format. Only PDF, DOC, and DOCX are allowed.';
-        } elseif ($_FILES['resume']['size'] > 5 * 1024 * 1024) { // 5MB limit
-            $submit_error = 'File size exceeds the 5MB limit.';
-        } else {
-            // Generate a unique file name to avoid collisions
-            $unique_file_name = uniqid('resume_', true) . '.' . $file_ext;
-            $uploaded_file_path = $upload_dir . '/' . $unique_file_name;
+
+    if (empty($submit_error)) {
+        if (isset($_FILES['resume']) && $_FILES['resume']['error'] === UPLOAD_ERR_OK) {
+            $file_tmp = $_FILES['resume']['tmp_name'];
+            $original_file_name = basename($_FILES['resume']['name']);
+            $file_ext = strtolower(pathinfo($original_file_name, PATHINFO_EXTENSION));
             
-            if (move_uploaded_file($file_tmp, $uploaded_file_path)) {
-                // Success uploading file
+            $allowed_exts = ['pdf', 'doc', 'docx'];
+            if (!in_array($file_ext, $allowed_exts)) {
+                $submit_error = 'Invalid file format. Only PDF, DOC, and DOCX are allowed.';
+            } elseif ($_FILES['resume']['size'] > 5 * 1024 * 1024) {
+                $submit_error = 'File size exceeds the 5MB limit.';
             } else {
-                $submit_error = 'Failed to save uploaded file.';
+                $unique_file_name = uniqid('resume_', true) . '.' . $file_ext;
+                $uploaded_file_path = $upload_dir . '/' . $unique_file_name;
+                
+                if (!move_uploaded_file($file_tmp, $uploaded_file_path)) {
+                    $submit_error = 'Failed to save uploaded file.';
+                }
             }
+        } else {
+            $submit_error = 'Resume upload is required.';
         }
-    } else {
-        $submit_error = 'Resume upload is required.';
     }
 
     if (empty($submit_error)) {
-        // Send Email
         $to = 'info@peatechservice.com, peatechservices89@gmail.com';
-        $subject = "New Job Application: " . $job_info['title'] . " - " . $firstName . " " . $lastName;
+        $role_subject_suffix = !empty($appliedRole) ? " (" . $appliedRole . ")" : "";
+        $subject = "New Job Application: " . $job_info['title'] . $role_subject_suffix . " - " . $firstName . " " . $lastName;
         
-        // Define dynamic resume download link
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https" : "http";
         $host = $_SERVER['HTTP_HOST'];
         $resume_url = $protocol . "://" . $host . "/uploads/" . basename($uploaded_file_path);
 
-        // Build HTML email body
+        $role_header_badge = !empty($appliedRole) ? "<div style='margin-top:6px; font-weight:bold; font-size:1.1rem; color:#ffddbb;'>Role: " . htmlspecialchars($appliedRole) . "</div>" : "";
+        $role_field_row = !empty($appliedRole) ? "<div class='field'><span class='label'>Selected Role:</span> <span class='value' style='color:#ff7b25; font-weight:bold;'>" . htmlspecialchars($appliedRole) . "</span></div>" : "";
+
         $html_body = "
         <html>
         <head>
@@ -148,14 +245,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class='container'>
                 <div class='header'>
                     <h2>New Application Submitted</h2>
-                    <p style='margin: 0;'>" . $job_info['title'] . "</p>
+                    <p style='margin: 0;'>" . htmlspecialchars($job_info['title']) . "</p>
+                    $role_header_badge
                 </div>
                 <div class='section'>
                     <h3 class='section-title'>Applicant Personal Details</h3>
-                    <div class='field'><span class='label'>Name:</span> <span class='value'>$firstName $lastName</span></div>
-                    <div class='field'><span class='label'>Email:</span> <span class='value'><a href='mailto:$email'>$email</a></span></div>
-                    <div class='field'><span class='label'>Phone:</span> <span class='value'>$phone</span></div>
-                    <div class='field'><span class='label'>Address:</span> <span class='value'>$address, $city, $state $zipCode</span></div>
+                    <div class='field'><span class='label'>Position:</span> <span class='value'>" . htmlspecialchars($job_info['title']) . "</span></div>
+                    $role_field_row
+                    <div class='field'><span class='label'>Name:</span> <span class='value'>" . htmlspecialchars($firstName . " " . $lastName) . "</span></div>
+                    <div class='field'><span class='label'>Email:</span> <span class='value'><a href='mailto:" . htmlspecialchars($email) . "'>" . htmlspecialchars($email) . "</a></span></div>
+                    <div class='field'><span class='label'>Phone:</span> <span class='value'>" . htmlspecialchars($phone) . "</span></div>
+                    <div class='field'><span class='label'>Address:</span> <span class='value'>" . htmlspecialchars("$address, $city, $state $zipCode") . "</span></div>
                 </div>
                 <div class='section'>
                     <h3 class='section-title'>Cover Letter</h3>
@@ -164,30 +264,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class='section' style='text-align: center;'>
                     <h3 class='section-title'>Resume/CV File</h3>
                     <p>The applicant's resume is attached to this email. You can also download it from the server using the link below:</p>
-                    <a href='$resume_url' class='btn-download'>Download $original_file_name</a>
+                    <a href='$resume_url' class='btn-download'>Download " . htmlspecialchars($original_file_name) . "</a>
                 </div>
             </div>
         </body>
         </html>";
 
-        // Boundary for attachment
         $semi_rand = md5(time());
         $mime_boundary = "==Multipart_Boundary_y{$semi_rand}y";
         
-        // Headers
         $headers = "MIME-Version: 1.0\r\n" .
                    "From: Peatech Careers <info@peatechservice.com>\r\n" .
                    "Reply-To: " . $email . "\r\n" .
                    "Content-Type: multipart/mixed;\r\n" .
                    " boundary=\"{$mime_boundary}\"";
         
-        // Multipart message
         $message = "--{$mime_boundary}\n" .
                    "Content-Type: text/html; charset=\"UTF-8\"\n" .
                    "Content-Transfer-Encoding: 7bit\n\n" .
                    $html_body . "\n\n";
         
-        // Attach file
         if (file_exists($uploaded_file_path)) {
             $file_content = chunk_split(base64_encode(file_get_contents($uploaded_file_path)));
             $message .= "--{$mime_boundary}\n" .
@@ -201,11 +297,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $message .= "--{$mime_boundary}--";
 
-        // Send mail
         if (@mail($to, $subject, $message, $headers)) {
             $submit_success = true;
         } else {
-            // Local fallback
             $submit_success = true;
         }
     }
@@ -216,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apply for <?php echo htmlspecialchars($job_info['title']); ?> position at Peatech Services.">
+    <meta name="description" content="View job details for <?php echo htmlspecialchars($job_info['title']); ?> at Peatech Services.">
     <title><?php echo htmlspecialchars($job_info['title']); ?> - Careers | Peatech Services</title>
     
     <!-- Bootstrap CSS -->
@@ -298,14 +392,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .job-header-title {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 12px;
         }
 
         .job-header-meta {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.85);
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -328,7 +422,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* Layout Grid */
         .job-content-container {
-            padding: 60px 0;
+            padding: 50px 0;
         }
 
         .job-detail-block {
@@ -353,9 +447,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 0;
         }
 
+        .job-category-header {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 1.4rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .job-category-header i {
+            color: var(--accent-orange);
+            font-size: 0.85rem;
+        }
+
         .job-text {
             color: #444;
             margin-bottom: 1.5rem;
+            font-size: 1rem;
         }
 
         .job-list {
@@ -368,13 +479,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #444;
         }
 
-        /* Form Styling */
+        /* Form / Sidebar Styling */
         .sticky-form-card {
             background-color: white;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             border: 1px solid var(--medium-grey);
+            position: sticky;
+            top: 90px;
         }
 
         .form-title {
@@ -384,61 +497,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 20px;
             border-bottom: 1px solid var(--medium-grey);
             padding-bottom: 12px;
-            text-align: center;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--dark-blue);
-            font-size: 0.85rem;
-            margin-bottom: 4px;
-        }
-
-        .form-control, .form-select {
-            padding: 10px 12px;
-            font-size: 0.9rem;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            margin-bottom: 12px;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 0.2rem rgba(38, 96, 117, 0.1);
-        }
-
-        .required-field::after {
-            content: " *";
-            color: #dc3545;
-        }
-
-        .file-upload-box {
-            border: 2px dashed #ced4da;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            background-color: #fcfcfc;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 12px;
-        }
-
-        .file-upload-box:hover {
-            border-color: var(--primary-blue);
-            background-color: #f0f8ff;
-        }
-
-        .file-upload-box i {
-            font-size: 1.8rem;
-            color: var(--primary-blue);
-            margin-bottom: 8px;
         }
 
         .btn-submit-job {
             background-color: var(--primary-blue);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 14px;
             font-weight: 700;
             border-radius: 6px;
             width: 100%;
@@ -448,18 +513,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .btn-submit-job:hover {
             background-color: #1d4d60;
-        }
-
-        /* Success Card layout inside container if submitted */
-        .success-card {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .success-card i {
-            font-size: 4rem;
-            color: #28a745;
-            margin-bottom: 20px;
+            color: white;
         }
 
         /* Footer */
@@ -536,12 +590,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>
+                    <!-- Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a> -->
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="https://facebook.com/peatech" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/peatech" class="mx-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
+                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -572,6 +627,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Job Header Section -->
     <section class="job-header-section">
         <div class="container">
+            <div class="mb-3">
+                <a href="../careers.php" class="text-white text-decoration-none small">
+                    <i class="fas fa-arrow-left me-1"></i> Back to All Openings
+                </a>
+            </div>
             <h1 class="job-header-title"><?php echo htmlspecialchars($job_info['title']); ?></h1>
             <div class="job-header-meta">
                 <span><i class="fas fa-briefcase"></i> <?php echo htmlspecialchars($job_info['department']); ?></span>
@@ -590,146 +650,113 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h2 class="job-section-title">Job Description</h2>
                     <p class="job-text"><?php echo htmlspecialchars($job_info['description']); ?></p>
 
-                    <h2 class="job-section-title">Key Responsibilities</h2>
-                    <ul class="job-list">
-                        <?php foreach ($job_info['responsibilities'] as $resp): ?>
-                            <li><?php echo htmlspecialchars($resp); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if (!empty($job_info['responsibilities'])): ?>
+                        <h2 class="job-section-title">Key Responsibilities</h2>
+                        <?php 
+                        $is_assoc = (array_keys($job_info['responsibilities']) !== range(0, count($job_info['responsibilities']) - 1));
+                        if ($is_assoc): ?>
+                            <?php foreach ($job_info['responsibilities'] as $category => $resp_items): ?>
+                                <h5 class="job-category-header">
+                                    <i class="fas fa-chevron-circle-right"></i> <?php echo htmlspecialchars(ucwords($category)); ?>
+                                </h5>
+                                <ul class="job-list">
+                                    <?php foreach ((array)$resp_items as $resp): ?>
+                                        <li><?php echo htmlspecialchars($resp); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <ul class="job-list">
+                                <?php foreach ($job_info['responsibilities'] as $resp): ?>
+                                    <li><?php echo htmlspecialchars($resp); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    <?php endif; ?>
 
-                    <h2 class="job-section-title">Requirements & Qualifications</h2>
-                    <ul class="job-list">
-                        <?php foreach ($job_info['requirements'] as $req): ?>
-                            <li><?php echo htmlspecialchars($req); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if (!empty($job_info['requirements'])): ?>
+                        <h2 class="job-section-title">Requirements & Qualifications</h2>
+                        <ul class="job-list">
+                            <?php foreach ($job_info['requirements'] as $req): ?>
+                                <li><?php echo htmlspecialchars($req); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
 
-                    <h2 class="job-section-title">Benefits & Perks</h2>
-                    <ul class="job-list">
-                        <?php foreach ($job_info['benefits'] as $benefit): ?>
-                            <li><?php echo htmlspecialchars($benefit); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if (!empty($job_info['benefits'])): ?>
+                        <h2 class="job-section-title">Benefits & Perks</h2>
+                        <ul class="job-list">
+                            <?php foreach ($job_info['benefits'] as $benefit): ?>
+                                <li><?php echo htmlspecialchars($benefit); ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+
+                    <!-- Bottom Call To Action Button -->
+                    <?php if (!empty($job_info['apply_url'])): ?>
+                        <div class="mt-5 pt-4 border-top d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div>
+                                <h4 class="mb-1 fw-bold text-dark">Interested in this opportunity?</h4>
+                                <p class="text-muted mb-0 small">Proceed to our application portal to submit your details.</p>
+                            </div>
+                            <a href="<?php echo htmlspecialchars($job_info['apply_url']); ?>" class="btn btn-primary px-4 py-3 fw-bold" style="background-color: var(--primary-blue); border: none; border-radius: 6px;">
+                                Apply for this Position <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
 
-            <!-- Right Column: Stick sidebar application form -->
+            <!-- Right Column: Sidebar Action Card -->
             <div class="col-lg-5">
                 <div class="sticky-form-card" id="application-card">
-                     <?php if ($submit_success): ?>
-                         <div class="success-card">
-                             <i class="fas fa-check-circle"></i>
-                             <h3 class="success-title">Application Received!</h3>
-                             <p class="success-message">
-                                 Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
-                             </p>
-                             <a href="../careers.php" class="btn btn-outline-secondary mt-3">Back to Careers</a>
-                         </div>
-
-                         <!-- Success Modal Popup -->
-                         <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true" data-bs-backdrop="static">
-                             <div class="modal-dialog modal-dialog-centered">
-                                 <div class="modal-content" style="border: none; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                                     <div class="modal-body text-center p-5">
-                                         <div style="font-size: 4.5rem; color: #266075; margin-bottom: 20px;">
-                                             <i class="fas fa-check-circle"></i>
-                                         </div>
-                                         <h3 class="modal-title mb-3" id="successModalLabel" style="font-weight: 700; color: #1a2a3a;">Application Received!</h3>
-                                         <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.6;">
-                                             Thank you, <strong><?php echo htmlspecialchars($firstName); ?></strong>. Your job application for the <strong><?php echo htmlspecialchars($job_info['title']); ?></strong> role has been successfully registered.
-                                         </p>
-                                         <a href="../careers.php" class="btn btn-primary px-4 py-2" style="background-color: #266075; border: none; font-weight: 600; border-radius: 6px;">Back to Careers</a>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <script>
-                             document.addEventListener('DOMContentLoaded', function() {
-                                 var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                                 successModal.show();
-                             });
-                         </script>
-                     <?php else: ?>
-                        <div class="form-title">Apply for this Position</div>
+                    <?php if (!empty($job_info['apply_url'])): ?>
+                        <!-- Quick Action Card directing to Progressive Application Page -->
+                        <div class="form-title">Job Overview</div>
                         
-                        <?php if (!empty($submit_error)): ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo htmlspecialchars($submit_error); ?>
+                        <div class="mb-3">
+                            <div class="text-muted small fw-semibold text-uppercase" style="font-size:0.75rem;">Position</div>
+                            <div class="fw-bold" style="color: var(--dark-blue); font-size: 1.05rem;"><?php echo htmlspecialchars($job_info['title']); ?></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="text-muted small fw-semibold text-uppercase" style="font-size:0.75rem;">Department</div>
+                            <div class="fw-semibold text-dark"><?php echo htmlspecialchars($job_info['department']); ?></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="text-muted small fw-semibold text-uppercase" style="font-size:0.75rem;">Location</div>
+                            <div class="fw-semibold text-dark"><?php echo htmlspecialchars($job_info['location']); ?></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="text-muted small fw-semibold text-uppercase" style="font-size:0.75rem;">Employment Type</div>
+                            <div class="fw-semibold text-dark"><?php echo htmlspecialchars($job_info['type']); ?></div>
+                        </div>
+
+                        <a href="<?php echo htmlspecialchars($job_info['apply_url']); ?>" class="btn-submit-job text-center text-decoration-none d-block py-3 fs-6">
+                            Apply for this Position <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+
+                        <div class="mt-4 pt-3 border-top text-muted small">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="fas fa-shield-alt text-primary"></i> Confidential hiring process
                             </div>
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="fas fa-layer-group text-primary"></i> 5-step progressive application form
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fas fa-file-pdf text-primary"></i> Resume / CV attachment required
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                        <!-- Embedded Form Fallback for other jobs -->
+                        <div class="form-title">Apply for this Position</div>
+                        <?php if (!empty($submit_error)): ?>
+                            <div class="alert alert-danger" role="alert"><?php echo htmlspecialchars($submit_error); ?></div>
                         <?php endif; ?>
-
-                         <form id="jobApplicationForm" class="needs-validation" method="POST" enctype="multipart/form-data" novalidate>
-                             <!-- Name -->
-                             <div class="row">
-                                 <div class="col-6">
-                                     <label for="firstName" class="form-label required-field">First Name</label>
-                                     <input type="text" class="form-control" id="firstName" name="firstName" required>
-                                     <div class="invalid-feedback">First name is required.</div>
-                                 </div>
-                                 <div class="col-6">
-                                     <label for="lastName" class="form-label required-field">Last Name</label>
-                                     <input type="text" class="form-control" id="lastName" name="lastName" required>
-                                     <div class="invalid-feedback">Last name is required.</div>
-                                 </div>
-                             </div>
-
-                             <!-- Email & Phone -->
-                             <div class="mt-3">
-                                 <label for="email" class="form-label required-field">Email Address</label>
-                                 <input type="email" class="form-control" id="email" name="email" required>
-                                 <div class="invalid-feedback">Please enter a valid email address (e.g., name@example.com).</div>
-                             </div>
-
-                             <div class="mt-3">
-                                 <label for="phone" class="form-label required-field">Phone Number</label>
-                                 <input type="tel" class="form-control" id="phone" name="phone" required>
-                                 <div class="invalid-feedback">Phone number is required.</div>
-                             </div>
-
-                             <!-- Address details -->
-                             <div class="mt-3">
-                                 <label for="address" class="form-label">Street Address</label>
-                                 <input type="text" class="form-control" id="address" name="address" placeholder="e.g., 5247 Wilson Mills Rd">
-                             </div>
-
-                             <div class="row mt-3">
-                                 <div class="col-6">
-                                     <label for="city" class="form-label">City</label>
-                                     <input type="text" class="form-control" id="city" name="city">
-                                 </div>
-                                 <div class="col-3">
-                                     <label for="state" class="form-label">State</label>
-                                     <input type="text" class="form-control" id="state" name="state">
-                                 </div>
-                                 <div class="col-3">
-                                     <label for="zipCode" class="form-label">ZIP</label>
-                                     <input type="text" class="form-control" id="zipCode" name="zipCode">
-                                 </div>
-                             </div>
-
-                             <!-- Metrics -->
-
-
-                             <!-- Cover Letter -->
-                             <div class="mt-3">
-                                 <label for="coverLetter" class="form-label">Cover Letter</label>
-                                 <textarea class="form-control" id="coverLetter" name="coverLetter" rows="3" placeholder="Briefly introduce yourself..."></textarea>
-                             </div>
-
-                             <!-- Resume Upload -->
-                             <div class="mt-3">
-                                 <label class="form-label required-field">Upload Resume / CV</label>
-                                 <div class="file-upload-box" id="uploadArea">
-                                     <i class="fas fa-file-pdf"></i>
-                                     <div class="fw-semibold text-secondary" style="font-size: 0.85rem;" id="fileNameDisplay">Click to choose Resume file</div>
-                                     <div class="text-muted small" style="font-size: 0.75rem;">Supports PDF, DOC, DOCX (Max 5MB)</div>
-                                     <input type="file" id="resume" name="resume" class="d-none" accept=".pdf,.doc,.docx" required>
-                                 </div>
-                                 <div class="invalid-feedback text-center mt-2" id="resumeFeedback" style="display: none;">Please choose and upload your resume file.</div>
-                             </div>
-
-                             <button type="submit" class="btn-submit-job">Submit Application</button>
-                         </form>
+                        <p class="text-muted small">Please contact us or submit your CV to <a href="mailto:info@peatechservice.com">info@peatechservice.com</a>.</p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -744,9 +771,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <img src="../images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo" style="filter: brightness(0) invert(1);">
                     <p>Building secure, reliable, and intelligent connections between people, products, and systems across healthcare, business, and industry.</p>
                     <div class="social-icons">
-                        <a href="https://facebook.com/peatech"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/peatech"><i class="fab fa-twitter"></i></a>
-                        <a href="https://instagram.com/peatech"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1DqeqTDb7V/" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/peatech-smart-services/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -782,68 +809,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Trigger file input click when clicking dashed upload box
-        const uploadArea = document.getElementById('uploadArea');
-        const resumeInput = document.getElementById('resume');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
-        const resumeFeedback = document.getElementById('resumeFeedback');
-        const form = document.getElementById('jobApplicationForm');
-        
-        if(uploadArea && resumeInput) {
-            uploadArea.addEventListener('click', () => {
-                resumeInput.click();
-            });
-            
-            resumeInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if(file) {
-                    fileNameDisplay.textContent = file.name;
-                    fileNameDisplay.style.color = 'var(--primary-blue)';
-                    uploadArea.style.borderColor = 'var(--primary-blue)';
-                    uploadArea.style.backgroundColor = '#f0f8ff';
-                    if(resumeFeedback) resumeFeedback.style.display = 'none';
-                } else {
-                    fileNameDisplay.textContent = 'Click to choose Resume file';
-                    fileNameDisplay.style.color = '';
-                    uploadArea.style.borderColor = '';
-                    uploadArea.style.backgroundColor = '';
-                }
-            });
-        }
-
-        if(form) {
-            form.addEventListener('submit', function(event) {
-                let isValid = true;
-                
-                // Custom validation for file input
-                if (!resumeInput.files || resumeInput.files.length === 0) {
-                    isValid = false;
-                    if(resumeFeedback) {
-                        resumeFeedback.style.display = 'block';
-                        resumeFeedback.style.color = '#dc3545';
-                    }
-                    uploadArea.style.borderColor = '#dc3545';
-                    uploadArea.style.backgroundColor = '#fff8f8';
-                }
-                
-                if (!form.checkValidity() || !isValid) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    
-                    // Highlight custom validation styles
-                    form.classList.add('was-validated');
-                    
-                    // Scroll to first invalid field
-                    const firstInvalid = form.querySelector(':invalid');
-                    if (firstInvalid) {
-                        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        firstInvalid.focus();
-                    }
-                }
-            }, false);
-        }
-    </script>
 </body>
 </html>

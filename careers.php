@@ -316,12 +316,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>
+                    <!-- Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a> -->
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <a href="https://facebook.com/peatech" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/peatech" class="mx-2"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
+                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -364,17 +365,17 @@
             <p class="section-subtitle">Browse our open positions below. Click on any role to view detailed responsibilities, requirements, and apply directly.</p>
             
             <div class="row g-4">
-                <!-- Sales/Marketing Specialist -->
+                <!-- Operations and Executive Support Coordinators -->
                 <div class="col-md-6">
                     <div class="opening-card">
-                        <h3 class="opening-title">Sales/Marketing Specialist</h3>
+                        <h3 class="opening-title">Operations and Executive Support Coordinators</h3>
                         <div class="opening-meta">
-                            <span><i class="fas fa-briefcase"></i> Sales & Marketing</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (Remote)</span>
-                            <span class="badge-custom">Full-Time</span>
+                            <span><i class="fas fa-briefcase"></i> Operations & Executive Support</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (Hybrid / Remote)</span>
+                            <span class="badge-custom">Full-Time (2 Positions)</span>
                         </div>
-                        <p class="opening-desc">Drive customer outreach, manage B2B pipelines, packaging complex digital twins and physics simulation solutions into impactful brand campaigns, and coordinate partnership strategies.</p>
-                        <a href="career/sales-marketing-specialist" class="btn-view-job">View Job & Apply</a>
+                        <p class="opening-desc">Peatech is hiring two coordinators to support Peatech's day-to-day priorities across property operations, team reporting, executive administration, and marketing.</p>
+                        <a href="career/operations-and-executive-support-coordinators" class="btn-view-job">View Job & Apply</a>
                     </div>
                 </div>
 
@@ -384,13 +385,28 @@
                         <h3 class="opening-title">Engineering Intern</h3>
                         <div class="opening-meta">
                             <span><i class="fas fa-briefcase"></i> Research & Development</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (Remote)</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
                             <span class="badge-custom">Internship</span>
                         </div>
                         <p class="opening-desc">Work with modeling algorithms and telemetry data translation processes on our PeaSyn digital twin simulation suite. Assist in simulating thermal gradients and melt pool dynamics.</p>
                         <a href="career/engineering-intern" class="btn-view-job">View Job & Apply</a>
                     </div>
                 </div>
+
+                <!-- Sales/Marketing Specialist (Commented Out)
+                <div class="col-md-6">
+                    <div class="opening-card">
+                        <h3 class="opening-title">Sales/Marketing Specialist</h3>
+                        <div class="opening-meta">
+                            <span><i class="fas fa-briefcase"></i> Sales & Marketing</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
+                            <span class="badge-custom">Full-Time</span>
+                        </div>
+                        <p class="opening-desc">Drive customer outreach, manage B2B pipelines, packaging complex digital twins and physics simulation solutions into impactful brand campaigns, and coordinate partnership strategies.</p>
+                        <a href="career/sales-marketing-specialist" class="btn-view-job">View Job & Apply</a>
+                    </div>
+                </div>
+                -->
             </div>
         </div>
     </section>
@@ -435,9 +451,9 @@
                     <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo" style="filter: brightness(0) invert(1);">
                     <p>Building secure, reliable, and intelligent connections between people, products, and systems across healthcare, business, and industry.</p>
                     <div class="social-icons">
-                        <a href="https://facebook.com/peatech"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/peatech"><i class="fab fa-twitter"></i></a>
-                        <a href="https://instagram.com/peatech"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1DqeqTDb7V/" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/peatech-smart-services/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
