@@ -943,7 +943,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="peasyn.php">PeaSyn</a></li>
+                    <?php require __DIR__ . '/products-nav.php'; ?>
                     <li class="nav-item"><a class="nav-link" href="index.php#services">Our Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php#vision">Vision</a></li>
@@ -1700,7 +1700,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo">
-                    <p>Peatech Services — The Connection Company. We build bridges that make life and business flow better.</p>
+                    <p>Peatech Services — Technology &amp; Engineering. We build bridges that make life and business flow better.</p>
                     <p><i class="fas fa-map-marker-alt me-2"></i> 5247 Wilson Mills RD #1012 Richmond Heights, OH 44143-3016 United States</p>
                     <p><a href="#">Show on map</a></p>
                     <div class="social-icons mt-4">
@@ -1732,7 +1732,7 @@
             </div>
             <hr class="footer-divider">
             <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | The Connection Company | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
+                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | Technology &amp; Engineering | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>

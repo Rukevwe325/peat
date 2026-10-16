@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/peasyn">PeaSyn</a></li>
+                <?php require __DIR__ . '/products-nav.php'; ?>
                 <li class="nav-item"><a class="nav-link" href="/articles">Articles</a></li>
                 <li class="nav-item"><a class="nav-link" href="/careers">Careers</a></li>
                 

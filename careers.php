@@ -9,8 +9,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Peatech Services - The Connection Company. View open positions and apply to join our team.">
-    <title>Careers - Peatech Services | The Connection Company</title>
+    <meta name="description" content="Join Peatech Services - Technology &amp; Engineering. View open positions and apply to join our team.">
+    <title>Careers - Peatech Services | Technology &amp; Engineering</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -340,7 +340,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="peasyn.php">PeaSyn</a></li>
+                    <?php require __DIR__ . '/products-nav.php'; ?>
                     <li class="nav-item"><a class="nav-link" href="index.php#services">Our Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php#vision">Vision</a></li>
@@ -495,7 +495,7 @@
             </div>
             <hr class="footer-divider">
             <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | The Connection Company | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
+                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | Technology &amp; Engineering | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>

@@ -13,6 +13,7 @@ Options -Indexes
 # FIRST: Handle specific pages (articles listing, peasyn, apply-operations)
 RewriteRule ^articles$ articles.php [L,QSA]
 RewriteRule ^peasyn$ peasyn.php [L,QSA]
+RewriteRule ^(acuvita|koda|ghmera)/?$ $1.php [L,QSA]
 RewriteRule ^apply-operations/?$ apply-operations.php [L,QSA]
 RewriteRule ^apply-engineering-intern/?$ apply-engineering-intern.php [L,QSA]
 RewriteRule ^apply-smart-system-engineer/?$ apply-smart-system-engineer.php [L,QSA]

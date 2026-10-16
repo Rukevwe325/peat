@@ -486,7 +486,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../peasyn.php">PeaSyn</a></li>
+                    <?php require __DIR__ . '/products-nav.php'; ?>
                     <li class="nav-item"><a class="nav-link" href="../index.php#services">Our Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="../articles.php">Articles</a></li>
                     <li class="nav-item"><a class="nav-link" href="../index.php#vision">Vision</a></li>
@@ -676,7 +676,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <hr class="footer-divider">
             <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | The Connection Company | <a href="../privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
+                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | Technology &amp; Engineering | <a href="../privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
