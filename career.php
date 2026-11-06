@@ -190,7 +190,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="../favicon.png" type="image/png">
     
     <style>
@@ -211,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             color: var(--text-dark);
             line-height: 1.6;
             background-color: var(--light-grey);
@@ -455,46 +454,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #777;
         }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <!-- Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a> -->
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
-                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.php">
-                <img src="../images/peatechlogo.webp" alt="Peatech Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
-                    <?php require __DIR__ . '/products-nav.php'; ?>
-                    <li class="nav-item"><a class="nav-link" href="../index.php#services">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../articles.php">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../index.php#vision">Vision</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="../careers.php">Careers</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body class="site-job">
+    <?php $site_active = 'careers'; require __DIR__ . '/site-header.php'; ?>
 
     <!-- Job Header Section -->
     <section class="job-header-section">
@@ -642,48 +606,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <img src="../images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo" style="filter: brightness(0) invert(1);">
-                    <p>Building secure, reliable, and intelligent connections between people, products, and systems across healthcare, business, and industry.</p>
-                    <div class="social-icons">
-                        <a href="https://www.facebook.com/share/1DqeqTDb7V/" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/peatech-smart-services/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <h5>Quick Navigation</h5>
-                    <ul>
-                        <li><a href="../index.php">Home</a></li>
-                        <li><a href="../peasyn.php">PeaSyn</a></li>
-                        <li><a href="../index.php#services">Our Services</a></li>
-                        <li><a href="../articles.php">Articles</a></li>
-                        <li><a href="../index.php#vision">Our Vision</a></li>
-                        <li><a href="../index.php#contact">Connect With Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h5>Connection Points</h5>
-                    <ul>
-                        <li><a href="../index.php#services">Our Services</a></li>
-                        <li><a href="../index.php#connection">Connection Ecosystem</a></li>
-                        <li><a href="../index.php#vision">Our Vision</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Success Stories</a></li>
-                        <li><a href="../careers.php">Join Our Team</a></li>
-                        <li><a href="../index.php#contact">Connect With Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="footer-divider">
-            <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | Technology &amp; Engineering | <a href="../privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
-            </div>
-        </div>
-    </footer>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

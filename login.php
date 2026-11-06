@@ -36,14 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login - Peatech Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #266075;
             --accent-orange: #ff7b25;
         }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
             height: 100vh;
             display: flex;
@@ -74,15 +73,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #1a4a5a;
         }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body class="site-login">
+    <?php require __DIR__ . '/site-header.php'; ?>
+    <main>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5">
                 <div class="login-card">
                     <div class="login-header">
-                        <i class="fas fa-newspaper fa-3x mb-3"></i>
-                        <h2>Peatech Login</h2>
+                        <h1>Sign in</h1>
                         <p class="mb-0">Article Management System</p>
                     </div>
                     <div class="login-body">
@@ -91,12 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php endif; ?>
                         <form method="POST">
                             <div class="mb-3">
-                                <label class="form-label">Username</label>
-                                <input type="text" name="username" class="form-control" required>
+                                <label class="form-label" for="login-username">Username</label>
+                                <input type="text" id="login-username" autocomplete="username" name="username" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" required>
+                                <label class="form-label" for="login-password">Password</label>
+                                <input type="password" id="login-password" autocomplete="current-password" name="password" class="form-control" required>
                             </div>
                             <button type="submit" class="btn btn-login btn-primary w-100">Login</button>
                         </form>
@@ -109,5 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+    </main>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 </body>
 </html>

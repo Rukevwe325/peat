@@ -20,24 +20,14 @@ require __DIR__ . '/product-enquiry-handler.php';
     <meta property="og:description" content="<?php echo $escape($product['meta']); ?>">
     <meta property="og:type" content="website">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/assets/products.css">
     <script src="/assets/products.js" defer></script>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
 <body class="product-page pp-<?php echo $escape($product_slug); ?>">
     <a class="pp-skip" href="#main">Skip to content</a>
-    <header class="pp-header">
-        <div class="pp-container pp-header-row">
-            <a href="/" class="pp-company"><img src="/images/peatechlogo.webp" width="132" height="40" alt="Peatech Services home"></a>
-            <button class="pp-menu-button" type="button" aria-expanded="false" aria-controls="product-navigation">Menu <span aria-hidden="true">☰</span></button>
-            <nav id="product-navigation" class="pp-nav" aria-label="Main navigation">
-                <a href="/#products">Our products</a>
-                <a href="/peasyn">PeaSyn</a>
-                <a href="/careers">Careers</a>
-                <a class="pp-nav-contact" href="<?php echo $escape($enquiry_url); ?>">Let’s connect <span aria-hidden="true">↗</span></a>
-            </nav>
-        </div>
-    </header>
+    <?php $site_active = 'products'; $site_contact_href = $enquiry_url; require __DIR__ . '/site-header.php'; ?>
     <main id="main">
         <section class="pp-hero">
             <div class="pp-container">
@@ -51,7 +41,7 @@ require __DIR__ . '/product-enquiry-handler.php';
                         <div class="pp-actions"><a href="<?php echo $escape($enquiry_url); ?>" class="pp-button"><?php echo $escape($product['cta']); ?> <span aria-hidden="true">↗</span></a><a href="#possibilities" class="pp-text-link">Explore the experience <span aria-hidden="true">↓</span></a></div>
                     </div>
                     <div class="pp-preview-wrap">
-                        <div class="pp-orbit pp-orbit-one" aria-hidden="true"></div><div class="pp-orbit pp-orbit-two" aria-hidden="true"></div>
+
                         <div class="pp-preview">
                             <div class="pp-preview-top"><span class="pp-preview-brand"><?php echo $escape($product['name']); ?><span class="pp-status-dot" aria-hidden="true"></span></span><span class="pp-example">Experience preview</span></div>
                             <p class="pp-preview-heading"><?php echo $escape($product['preview_label']); ?></p>
@@ -92,6 +82,6 @@ require __DIR__ . '/product-enquiry-handler.php';
         <?php require __DIR__ . '/product-enquiry-form.php'; ?>
         <section class="pp-more"><div class="pp-container"><p class="pp-eyebrow">More ways we connect</p><div class="pp-more-grid"><?php foreach ($product_pages as $slug => $other): if ($slug === $product_slug) continue; ?><a href="/<?php echo $escape($slug); ?>"><span class="pp-more-name"><?php echo $escape($other['name']); ?> <span aria-hidden="true">↗</span></span><span><?php echo $escape($other['category']); ?></span></a><?php endforeach; ?><a href="/peasyn"><span class="pp-more-name">PeaSyn <span aria-hidden="true">↗</span></span><span>Advanced manufacturing & digital twins</span></a></div></div></section>
     </main>
-    <footer class="pp-footer"><div class="pp-container"><div><a href="/" class="pp-footer-name">PEATECH <span>SERVICES</span></a><p>Technology &amp; Engineering.</p></div><nav aria-label="Footer navigation"><a href="/#products">Our products</a><a href="/careers">Careers</a><a href="#enquiry">Contact Peatech</a></nav><p class="pp-copyright">© <?php echo date('Y'); ?> Peatech Services LLC.</p></div></footer>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 </body>
 </html>

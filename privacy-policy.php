@@ -17,7 +17,6 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.png" type="image/png">
     
     <style>
@@ -38,7 +37,7 @@
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             color: var(--text-dark);
             line-height: 1.6;
             background-color: var(--light-grey);
@@ -84,7 +83,7 @@
 
         /* Header block */
         .page-header {
-            background: linear-gradient(rgba(26, 42, 58, 0.85), rgba(26, 42, 58, 0.95)), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background: #e6eef0;
             background-size: cover;
             background-position: center;
             color: white;
@@ -202,46 +201,11 @@
             color: #777;
         }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="https://facebook.com/peatech" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com/peatech" class="mx-2"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <img src="images/peatechlogo.webp" alt="Peatech Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="peasyn.php">PeaSyn</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php#services">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php#vision">Vision</a></li>
-                    <li class="nav-item"><a class="nav-link" href="careers.php">Careers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php#contact">Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body class="site-policy">
+    <?php $site_active = ''; require __DIR__ . '/site-header.php'; ?>
 
     <!-- Page Header -->
     <header class="page-header">
@@ -322,48 +286,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo" style="filter: brightness(0) invert(1);">
-                    <p>Building secure, reliable, and intelligent connections between people, products, and systems across healthcare, business, and industry.</p>
-                    <div class="social-icons">
-                        <a href="https://facebook.com/peatech"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/peatech"><i class="fab fa-twitter"></i></a>
-                        <a href="https://instagram.com/peatech"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <h5>Quick Navigation</h5>
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="peasyn.php">PeaSyn</a></li>
-                        <li><a href="index.php#services">Our Services</a></li>
-                        <li><a href="articles.php">Articles</a></li>
-                        <li><a href="index.php#vision">Our Vision</a></li>
-                        <li><a href="index.php#contact">Connect With Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h5>Connection Points</h5>
-                    <ul>
-                        <li><a href="index.php#services">Our Services</a></li>
-                        <li><a href="index.php#connection">Connection Ecosystem</a></li>
-                        <li><a href="index.php#vision">Our Vision</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Success Stories</a></li>
-                        <li><a href="careers">Join Our Team</a></li>
-                        <li><a href="index.php#contact">Connect With Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="footer-divider">
-            <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | The Connection Company | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
-            </div>
-        </div>
-    </footer>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -9,88 +9,108 @@
     <meta property="og:description" content="Software, intelligent systems, and automation. Built for real-world impact.">
     <meta property="og:type" content="website">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="/assets/homepage.css">
-    <script src="/assets/homepage.js" defer></script>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
 <body class="home-page">
     <a class="home-skip" href="#main">Skip to content</a>
-    <header class="home-header">
-        <div class="home-container home-header-inner">
-            <a href="/" class="home-logo"><img src="/images/peatechlogo.webp" alt="Peatech Services home" width="155" height="45"></a>
-            <button type="button" class="home-menu-button" aria-controls="home-navigation" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button>
-            <nav id="home-navigation" aria-label="Main navigation">
-                <a href="#services">What we do</a>
-                <a href="#products">Our products</a>
-                <a href="#vision">About us</a>
-                <a href="/careers">Careers</a>
-                <a href="#contact" class="home-nav-cta">Let’s talk <span aria-hidden="true">↗</span></a>
-            </nav>
-        </div>
-    </header>
+    <?php require __DIR__ . '/site-header.php'; ?>
     <main id="main">
-        <section class="home-hero">
+        <section class="home-hero" aria-labelledby="home-headline">
+            <img class="home-hero-image" src="/images/automation-workcell.webp" srcset="/images/automation-workcell-small.webp 720w, /images/automation-workcell.webp 1360w" sizes="100vw" width="1360" height="907" alt="" fetchpriority="high">
             <div class="home-container">
-                <p class="home-eyebrow"><span class="home-dot" aria-hidden="true"></span>Technology &amp; engineering</p>
-                <div class="home-hero-grid">
-                    <div>
-                        <h1>Technology and<br>engineering.<br><em>Built for real-world<br>impact.</em></h1>
-                        <a href="#contact" class="home-button">Discuss your project <span aria-hidden="true">↗</span></a>
-                    </div>
-                    <div class="home-hero-aside">
-                        <p class="home-intro">We develop software, intelligent systems, and automation solutions that turn complex challenges into practical possibilities.</p>
-                        <div class="home-schematic">
-                            <svg viewBox="0 0 420 250" role="img" aria-labelledby="system-diagram-title">
-                                <title id="system-diagram-title">Software, systems, and automation come together in one engineering approach.</title>
-                                <g fill="none" stroke="#b2c6c5" stroke-width="1.2"><path d="M20 49H46M20 125H46M20 201H46M20 49V201M228 49H275V125H330M228 125H330M228 201H275V125"/><circle cx="347" cy="125" r="17"/><path d="M364 125H402"/></g>
-                                <g fill="#fafaf7" stroke="#b2c6c5"><rect x="46" y="22" width="182" height="54" rx="4"/><rect x="46" y="98" width="182" height="54" rx="4"/><rect x="46" y="174" width="182" height="54" rx="4"/></g>
-                                <g fill="#264d53" font-family="Inter, Arial, sans-serif" font-size="11" letter-spacing="1.5"><text x="65" y="54">SOFTWARE</text><text x="65" y="130">INTELLIGENT SYSTEMS</text><text x="65" y="206">AUTOMATION</text></g>
-                                <circle cx="347" cy="125" r="5" fill="#d77542"/><circle cx="20" cy="49" r="3" fill="#264d53"/><circle cx="20" cy="201" r="3" fill="#264d53"/>
-                            </svg>
-                            <p>Different disciplines. One practical purpose.</p>
-                        </div>
-                    </div>
+                <div class="home-hero-copy">
+                    <h1 id="home-headline">Software, engineering,<br><span>and automation.</span></h1>
+                    <p class="home-intro">Peatech builds digital products, integrates systems, and automates workflows.</p>
+                    <div class="home-hero-actions"><a href="#contact" class="home-button">Discuss a project <span aria-hidden="true">↗</span></a><a href="#products" class="home-secondary">Explore our portfolio <span aria-hidden="true">↓</span></a></div>
                 </div>
-                <div class="home-hero-bottom"><span>Ideas, developed into useful solutions.</span><a href="#products">Explore our work <span aria-hidden="true">↓</span></a></div>
             </div>
         </section>
 
-        <section id="services" class="home-section home-capabilities">
+        <section id="services" class="home-section home-capabilities" aria-labelledby="capabilities-heading">
             <span id="connection" class="home-anchor" aria-hidden="true"></span>
             <div class="home-container">
-                <div class="home-section-heading"><p class="home-eyebrow">01 / What we do</p><h2>Complex challenges.<br>Practical solutions.</h2><p>Engineering thinking and software development, brought together to build things that work.</p></div>
+                <div class="home-section-heading"><h2 id="capabilities-heading">What we do</h2><a id="vision" href="/about" class="home-inline-link">How we work <span aria-hidden="true">↗</span></a></div>
                 <div class="home-capability-list">
-                    <article><h3>Software &amp; digital products</h3><div><p>Purpose-built applications and platforms that make information easier to use and everyday work easier to manage.</p><span class="home-disciplines">Web &amp; mobile applications · Digital platforms · Business tools</span></div></article>
-                    <article><h3>Intelligent systems &amp; engineering</h3><div><p>Bring software, data, and physical processes together. Use analysis, modeling, and testing to understand how a system should work.</p><span class="home-disciplines">Systems design · Integration · Modeling &amp; simulation</span></div></article>
-                    <article><h3>Automation solutions</h3><div><p>Simplify repeatable work and improve consistency with automation shaped around the way your operations actually run.</p><span class="home-disciplines">Workflow automation · Process improvement · Operational tools</span></div></article>
+                    <article><h3>Software development</h3><p>Web and mobile applications, digital platforms, and tools built around the way you work.</p></article>
+                    <article><h3>Systems engineering</h3><p>Integrate software, data, and physical equipment. Model and test how the system behaves.</p></article>
+                    <article><h3>Automation</h3><p>Automate repeatable tasks and give teams better visibility into day-to-day operations.</p></article>
                 </div>
             </div>
         </section>
 
-        <section id="products" class="home-section home-products">
-            <div class="home-container home-products-grid">
-                <div class="home-product-intro"><p class="home-eyebrow">02 / Our products</p><h2>Built with<br>a purpose.</h2><p>Explore the different ways we turn thoughtful technology into practical experiences.</p></div>
-                <div class="home-product-list">
-                    <a href="/acuvita" class="home-product home-product-acuvita"><span class="home-product-mark" aria-hidden="true">A</span><div><span class="home-product-category">Personal wellness</span><h3>AcuVita</h3><p>Everyday wellness guidance and personal context, with doctor sharing you control.</p></div><span class="home-product-arrow" aria-hidden="true">↗</span></a>
-                    <a href="/koda" class="home-product home-product-koda"><span class="home-product-mark" aria-hidden="true">K</span><div><span class="home-product-category">Academic operations</span><h3>KODA</h3><p>Coursework, communication, and institutional operations in one academic platform.</p></div><span class="home-product-arrow" aria-hidden="true">↗</span></a>
-                    <a href="/ghmera" class="home-product home-product-ghmera"><span class="home-product-mark" aria-hidden="true">GH</span><div><span class="home-product-category">Community support</span><h3>Ghmera</h3><p>A clearer way to ask for help, find relevant people, and coordinate support.</p></div><span class="home-product-arrow" aria-hidden="true">↗</span></a>
-                    <a href="/peasyn" class="home-product home-product-peasyn"><span class="home-product-mark" aria-hidden="true">PS</span><div><span class="home-product-category">Simulation &amp; digital twins</span><h3>PeaSyn</h3><p>Physics-guided simulation and digital twins for advanced manufacturing.</p></div><span class="home-product-arrow" aria-hidden="true">↗</span></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="vision" class="home-section home-about">
+        <section id="products" class="home-section home-products" aria-labelledby="products-heading">
             <div class="home-container">
-                <div class="home-about-grid"><div><p class="home-eyebrow">03 / About Peatech</p><h2>Clear thinking.<br>Purposeful building.</h2></div><div><p class="home-about-lead">We are a technology and engineering company focused on making ideas useful in the real world.</p><p>Our work starts with the problem and the people who will use the solution. We bring software, systems, and engineering together to design, build, test, and improve what comes next.</p><p>Our aim is straightforward: solutions that are clear in purpose, dependable in use, and able to evolve as needs change.</p></div></div>
-                <div id="approach" class="home-process"><article><span class="home-number">01 / Understand</span><h3>Start with the need.</h3><p>Define the goals, users, constraints, and priorities.</p></article><article><span class="home-number">02 / Develop</span><h3>Build with purpose.</h3><p>Design, prototype, and test a practical solution.</p></article><article><span class="home-number">03 / Improve</span><h3>Learn through use.</h3><p>Evaluate the result and refine what comes next.</p></article></div>
-                <div id="faq" class="home-questions"><h3>A few useful answers.</h3><div><details><summary>Can you work with our existing systems?<span aria-hidden="true">+</span></summary><p>We can assess how new software or automation could work with your current tools, data, devices, and workflows. Understanding the interfaces and constraints comes before defining an integration approach.</p></details><details><summary>Do you build products and custom solutions?<span aria-hidden="true">+</span></summary><p>Yes. We develop our own products alongside software and engineering solutions for specific project needs. Tell us what you want to build or improve, and we can discuss the right approach.</p></details><details><summary>How do we start a project?<span aria-hidden="true">+</span></summary><p>Use the contact form below to share your idea, the challenge, and any requirements you already have. We’ll discuss the information needed to define a sensible scope and next steps.</p></details></div></div>
+                <div class="home-portfolio-heading">
+                    <h2 id="products-heading">Our portfolio</h2>
+                    <p>Products we’re building, from engineering simulation to platforms for everyday use.</p>
+                </div>
+                <div class="home-portfolio-grid">
+                    <a class="home-work home-work-peasyn" href="/peasyn">
+                        <img class="home-work-study" src="/images/peasyn-thermal-study.svg" width="640" height="340" loading="lazy" alt="Thermal simulation of heat spreading along a deposited metal bead">
+                        <div class="home-work-copy"><p class="home-work-category">Simulation &amp; digital twins</p><h3>PeaSyn <span aria-hidden="true">↗</span></h3><p>Combines machine behavior, process data, and physics-guided models to help engineers understand how manufacturing processes behave.</p></div>
+                    </a>
+                    <a class="home-work home-work-acuvita" href="/acuvita">
+                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
+                        <div class="home-work-copy"><p class="home-work-category">Wellness software</p><h3>AcuVita <span aria-hidden="true">↗</span></h3><p>Helps people build daily wellness habits and choose what to share with their doctor.</p></div>
+                    </a>
+                    <a class="home-work home-work-koda" href="/koda">
+                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span>
+                        <div class="home-work-copy"><p class="home-work-category">Education operations</p><h3>KODA <span aria-hidden="true">↗</span></h3><p>Brings coursework, communication, student support, and institutional operations into one platform.</p></div>
+                    </a>
+                    <a class="home-work home-work-ghmera" href="/ghmera">
+                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a7 7 0 0 1-7 7H9l-4 3v-5a7 7 0 0 1 4-12h4a7 7 0 0 1 7 7Z"/><path d="M9 11h6m-3-3v6"/></svg></span>
+                        <div class="home-work-copy"><p class="home-work-category">Community software</p><h3>Ghmera <span aria-hidden="true">↗</span></h3><p>Gives people a structured way to request help, find relevant helpers, and coordinate support.</p></div>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="home-section home-contact">
-            <div class="home-container home-contact-grid"><div><p class="home-eyebrow">04 / Let’s talk</p><h2>What would you<br>like to build?</h2><p>Bring us an idea, a technical challenge, or a process you want to improve.</p><p class="home-contact-note">Tell us a little about it.<br>We’ll take the next step together.</p></div><div class="contact-form"><?php require __DIR__ . '/homepage-contact-form.php'; ?></div></div>
+        <section id="company" class="home-section home-company" aria-labelledby="company-heading">
+            <div class="home-container home-company-grid">
+                <div>
+                    <p class="home-company-kicker">About Peatech</p>
+                    <h2 id="company-heading">From research to working systems.</h2>
+                    <p class="home-company-intro">Based in Cleveland, Ohio, Peatech is a technology and engineering company that brings applied research, software development, and systems integration together. We work with businesses, manufacturers, startups, and institutions to take an idea from a technical question to a solution they can test and use.</p>
+                    <a href="/about" class="home-inline-link">Learn how we work <span aria-hidden="true">↗</span></a>
+                </div>
+                <div class="home-company-examples">
+                    <h3>What that looks like</h3>
+                    <dl>
+                        <div><dt>Test a design before building it</dt><dd>Use simulation to study how a process behaves. With <a href="/peasyn">PeaSyn</a>, one example is examining how heat spreads as metal is deposited.</dd></div>
+                        <div><dt>Make equipment data useful</dt><dd>Bring readings from equipment into a software interface so teams can monitor a process without checking each device separately.</dd></div>
+                        <div><dt>Reduce manual work</dt><dd>Build a workflow that captures requests, tracks progress, and prompts the next action without relying on spreadsheets and follow-up emails.</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section id="working-together" class="home-section home-engagement" aria-labelledby="engagement-heading">
+            <div class="home-container">
+                <div class="home-section-heading"><h2 id="engagement-heading">How a project starts</h2><a href="/about#approach" class="home-inline-link">More about our approach <span aria-hidden="true">↗</span></a></div>
+                <ol class="home-engagement-steps">
+                    <li><h3>Understand the problem</h3><p>Tell us what you’re trying to achieve, what’s in place today, and where the work gets stuck.</p></li>
+                    <li><h3>Agree on a scope</h3><p>Identify the requirements, the constraints, and what a useful first version needs to do.</p></li>
+                    <li><h3>Build and test</h3><p>Develop the solution in stages and check it against real workflows before expanding it.</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="team" class="home-section home-team" aria-labelledby="home-team-heading">
+            <div class="home-container">
+                <div class="home-section-heading"><h2 id="home-team-heading">Meet our team</h2></div>
+                <?php require __DIR__ . '/team-cards.php'; ?>
+            </div>
+        </section>
+
+        <section id="contact" class="home-section home-contact" aria-labelledby="contact-heading">
+            <div class="home-container home-contact-grid">
+                <div><h2 id="contact-heading">Discuss your project</h2><p>Tell us what you’re building, integrating, or trying to automate.</p></div>
+                <div class="contact-form"><?php require __DIR__ . '/homepage-contact-form.php'; ?></div>
+            </div>
         </section>
     </main>
-    <footer class="home-footer"><div class="home-container"><div><a href="/" class="home-footer-brand">Peatech<span>Services</span></a><p>Technology &amp; engineering.</p></div><nav aria-label="Footer navigation"><a href="#products">Products</a><a href="/articles">Articles</a><a href="/careers">Careers</a><a href="/privacy-policy">Privacy</a></nav><p class="home-copyright">© <?php echo date('Y'); ?> Peatech Services LLC.</p></div></footer>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 </body>
 </html>

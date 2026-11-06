@@ -34,17 +34,18 @@ $notifications = $stmt->fetchAll();
     <title>Notifications - Peatech Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary-blue: #266075; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; }
+        body { font-family: var(--site-body); background: #f8f9fa; }
         .notification-card { background: white; border-radius: 12px; padding: 1rem; margin-bottom: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: all 0.2s; }
         .notification-card.unread { background: #e7f3ff; border-left: 4px solid var(--primary-blue); }
         .notification-card:hover { transform: translateX(5px); }
         .notification-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body class="site-editorial">
     <?php include 'navbar-fragment.php'; ?>
     
     <div class="container py-4">

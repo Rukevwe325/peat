@@ -41,18 +41,19 @@ $articles = $stmt->fetchAll();
     <title>My Submissions - Peatech Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary-blue: #266075; --dark-blue: #1a2a3a; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; }
+        body { font-family: var(--site-body); background: #f8f9fa; }
         .table-container { background: white; border-radius: 15px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .status-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
         .status-draft { background: #6c757d; color: white; }
         .status-pending_review { background: #ffc107; color: #000; }
         .status-published { background: #28a745; color: white; }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body class="site-editorial">
     <?php include 'navbar-fragment.php'; ?>
     
     <div class="container py-4">

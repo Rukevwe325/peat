@@ -316,7 +316,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.png" type="image/png">
 
     <style>
@@ -338,7 +337,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             color: var(--text-dark);
             background-color: var(--light-bg);
             min-height: 100vh;
@@ -890,35 +889,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
-
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start">
-                    <!-- Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a> -->
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
-                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<body class="site-application">
     <!-- Portal Header (Sticky) -->
     <header class="portal-header">
         <div class="container d-flex align-items-center justify-content-between">
-            <a href="index.php">
-                <img src="images/peatechlogo.webp" alt="Peatech Services" class="header-logo-img">
+            <a href="/">
+                <img src="/images/peatechlogo.webp" alt="Peatech Services" class="header-logo-img">
             </a>
             <div class="d-flex align-items-center gap-2">
                 <a href="<?php echo htmlspecialchars($job_url); ?>" class="btn btn-outline-secondary header-btn">Job Overview</a>
-                <a href="careers.php" class="btn btn-outline-primary header-btn" style="color: var(--primary-blue); border-color: var(--primary-blue);">All Positions</a>
+                <a href="/careers" class="btn btn-outline-primary header-btn" style="color: var(--primary-blue); border-color: var(--primary-blue);">All Positions</a>
             </div>
         </div>
     </header>
@@ -1378,17 +1361,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Footer -->
-    <footer class="text-center text-muted small py-4 border-top bg-white">
-        <div class="container">
-            <div class="mb-2">
-                <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2 text-secondary" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
-                <!--<a href="https://twitter.com/peatech" class="mx-2 text-secondary"><i class="fab fa-twitter"></i></a>-->
-                <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2 text-secondary" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2 text-secondary" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            © 2026 Peatech Services. All rights reserved. | The Connection Company
-        </div>
-    </footer>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

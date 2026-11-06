@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" role="img" aria-labelledby="title">
+  <title id="title">Illustration of a heat field along a deposited metal bead</title>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#38515e" stroke-width=".65"/></pattern>
+    <linearGradient id="heat"><stop stop-color="#346a91"/><stop offset=".5" stop-color="#59b5be"/><stop offset=".78" stop-color="#ffc477"/><stop offset="1" stop-color="#ff7b25"/></linearGradient>
+    <radialGradient id="pool"><stop stop-color="#fff0bf"/><stop offset=".26" stop-color="#ff994f" stop-opacity=".9"/><stop offset="1" stop-color="#ff7b25" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path fill="#132d39" d="M0 0h640v340H0z"/><path fill="url(#grid)" d="M0 0h640v340H0z"/>
+  <path d="M71 199l211-92 290 71-216 100z" fill="#234b5e" stroke="#77949e"/>
+  <path d="M71 199l285 79 216-100v24l-216 102-285-80z" fill="#142f3d" stroke="#527687"/>
+  <path d="M113 211l212-93m-165 106 212-94m-162 108 212-96m-162 110 211-97m-166 111 211-99M121 177l284 78m-234-101 285 78m-235-100 285 77" fill="none" stroke="#527687" stroke-width=".7"/>
+  <path d="M163 208q80-38 188-79l102 29q-79 36-194 82z" fill="#244458" stroke="#91b2bd"/>
+  <path d="M206 222q89-39 201-86l18 5q-100 44-203 88z" fill="url(#heat)"/>
+  <ellipse cx="416" cy="142" rx="63" ry="32" fill="url(#pool)"/>
+  <path d="M416 47v89" stroke="#ffb478" stroke-dasharray="5 5"/><circle cx="416" cy="142" r="5" fill="#fff0bf"/>
+  <path d="M442 90h101m-102 0-25 28M45 290v-29m0 29 29 8m-29-8-15 7" fill="none" stroke="#9cbdc5"/>
+  <path d="M467 294h106v7H467z" fill="url(#heat)"/>
+  <g fill="#c1d5dc" font-family="monospace" font-size="12" letter-spacing="1"><text x="30" y="38">PEASYN / PROCESS MODEL</text><text x="468" y="77">HEAT INPUT</text><text x="467" y="321">THERMAL FIELD</text></g>
+</svg>

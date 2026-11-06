@@ -27,6 +27,12 @@ if (preg_match('#^/career/([^/]+)$#', $path, $matches)) {
     return;
 }
 
+if (preg_match('#^/team/([a-z0-9-]+)/?$#', $path, $matches)) {
+    $_GET['member'] = $matches[1];
+    require __DIR__ . '/team.php';
+    return;
+}
+
 // 3. Fallback routing for extensionless PHP files
 // E.g., /peasyn -> peasyn.php, /articles -> articles.php
 $clean_path = trim($path, '/');

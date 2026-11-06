@@ -22,6 +22,7 @@ RewriteRule ^apply-sales-marketing-strategist/?$ apply-sales-marketing-strategis
 # SECOND: Handle article and career URLs (supports optional trailing slash)
 RewriteRule ^article/([^/]+)/?$ article.php?slug=$1 [L,QSA]
 RewriteRule ^career/([^/]+)/?$ career.php?job=$1 [L,QSA]
+RewriteRule ^team/([a-z0-9-]+)/?$ team.php?member=$1 [L]
 
 # THIRD: Remove .php extension from ALL OTHER pages
 RewriteCond %{REQUEST_FILENAME} !-d

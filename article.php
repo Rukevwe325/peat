@@ -87,7 +87,6 @@ $clean_content = cleanDisplayContent($article['content']);
     <title><?php echo htmlspecialchars($article['heading']); ?> - Peatech Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #266075;
@@ -105,7 +104,7 @@ $clean_content = cleanDisplayContent($article['content']);
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             background: white;
             line-height: 1.6;
         }
@@ -494,7 +493,8 @@ $clean_content = cleanDisplayContent($article['content']);
             width: 100%;
             height: 3px;
             background: transparent;
-            z-index: 1001;
+            z-index: 1031;
+            pointer-events: none;
         }
         
         .progress-bar {
@@ -517,8 +517,10 @@ $clean_content = cleanDisplayContent($article['content']);
             }
         }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body class="site-editorial">
     <!-- Reading Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>

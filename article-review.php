@@ -95,10 +95,9 @@ if (!empty($dept_ids)) {
     <title>Pending Reviews - Peatech Services</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary-blue: #266075; --accent-orange: #ff7b25; --dark-blue: #1a2a3a; }
-        body { font-family: 'Inter', sans-serif; background: #f8f9fa; }
+        body { font-family: var(--site-body); background: #f8f9fa; }
         .review-card { background: white; border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .article-preview { background: #f8f9fa; padding: 1rem; border-radius: 8px; max-height: 300px; overflow-y: auto; font-size: 0.9rem; }
         .btn-approve { background: #28a745; border: none; padding: 10px 25px; border-radius: 8px; color: white; }
@@ -107,8 +106,10 @@ if (!empty($dept_ids)) {
         .btn-full-preview { background: var(--primary-blue); border: none; padding: 10px 25px; border-radius: 8px; color: white; }
         .btn-full-preview:hover { background: #1a4a5a; color: white; }
     </style>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
 </head>
-<body>
+<body class="site-editorial">
     <?php include 'navbar-fragment.php'; ?>
     
     <div class="container py-4">

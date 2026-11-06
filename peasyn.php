@@ -1,3 +1,10 @@
+<?php
+$product_slug = 'peasyn';
+$product = ['name' => 'PeaSyn', 'mark' => 'PS', 'category' => 'Simulation & digital twins'];
+$site_contact_href = '#enquiry';
+$escape = static function ($text) { return htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); };
+require __DIR__ . '/product-enquiry-handler.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +19,6 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -30,14 +36,14 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--site-body);
             color: var(--text-dark);
             background-color: #ffffff;
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--site-display);
             font-weight: 700;
         }
 
@@ -66,7 +72,7 @@
         }
 
         .logo-text-peasyn {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--site-display);
             font-size: 2.2rem;
             font-weight: 800;
             color: var(--dark-blue);
@@ -267,7 +273,7 @@
             font-size: 1.1rem;
             font-weight: 700;
             color: #ffffff;
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--site-display);
         }
 
         .insight-rec {
@@ -906,53 +912,14 @@
         }
 
         /* Demo/Partner Request Modal Placeholders */
-        #demoRequestModal input::placeholder,
-        #demoRequestModal textarea::placeholder {
-            color: #94a3b8 !important;
-            opacity: 1; /* Firefox */
-        }
-    </style>
-</head>
-<body>
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="row align-items-center">
-                <!--<div class="col-md-6 text-center text-md-start">-->
-                <!--    Need help? Call us <a href="tel:1-800-123-4567">1-800-123-4567</a>-->
-                <!--</div>-->
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
-                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <img src="images/peatechlogo.webp" alt="Peatech Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                    <?php require __DIR__ . '/products-nav.php'; ?>
-                    <li class="nav-item"><a class="nav-link" href="index.php#services">Our Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php#vision">Vision</a></li>
-                    <li class="nav-item"><a class="nav-link" href="careers.php">Careers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php#contact">Contact Us</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    </style>
+    <link rel="stylesheet" href="/assets/products.css">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site.js" defer></script>
+</head>
+<body class="site-peasyn">
+    <?php $site_active = 'products'; require __DIR__ . '/site-header.php'; ?>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -1021,7 +988,7 @@
                                 <div class="twin-panel-card">
                                     <div class="twin-panel-title">Melt Pool Temp. (°C)</div>
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div style="font-size: 0.95rem; font-weight: 700; font-family: 'Outfit'; color: #ef4444;">1623°C</div>
+                                        <div style="font-size: 0.95rem; font-weight: 700; font-family: var(--site-display); color: #ef4444;">1623°C</div>
                                         <svg width="40" height="20" viewBox="0 0 40 20">
                                             <path d="M5 15 A 15 15 0 0 1 35 15" stroke="#334155" stroke-width="3" fill="none"/>
                                             <path d="M5 15 A 15 15 0 0 1 25 5" stroke="#ef4444" stroke-width="3" fill="none"/>
@@ -1428,12 +1395,12 @@
                                         <!-- Gradient bar -->
                                         <rect x="0" y="20" width="10" height="140" fill="url(#legendGrad)" rx="2"/>
                                         <!-- Title label -->
-                                        <text x="5" y="10" fill="#475569" font-size="11" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">°C</text>
+                                        <text x="5" y="10" fill="#475569" font-size="11" font-weight="700" font-family="var(--site-display)" text-anchor="middle">°C</text>
                                         <!-- Ticks / Values -->
-                                        <text x="18" y="25" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">1600</text>
-                                        <text x="18" y="67" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">1200</text>
-                                        <text x="18" y="109" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">800</text>
-                                        <text x="18" y="155" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">400</text>
+                                        <text x="18" y="25" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">1600</text>
+                                        <text x="18" y="67" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">1200</text>
+                                        <text x="18" y="109" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">800</text>
+                                        <text x="18" y="155" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">400</text>
                                     </g>
                                 </svg>
                             </div>
@@ -1508,7 +1475,7 @@
                                     <g transform="translate(280, 75)">
                                         <line x1="0" y1="0" x2="40" y2="0" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="2 2"/>
                                         <polygon points="40,0 35,-3 35,3" fill="#94a3b8"/>
-                                        <text x="20" y="-8" fill="#94a3b8" font-size="8" font-family="'Inter', sans-serif" text-anchor="middle" font-weight="600">Travel Direction</text>
+                                        <text x="20" y="-8" fill="#94a3b8" font-size="8" font-family="var(--site-body)" text-anchor="middle" font-weight="600">Travel Direction</text>
                                     </g>
 
                                     <!-- Colorbar Legend (Right side) -->
@@ -1516,12 +1483,12 @@
                                         <!-- Gradient bar -->
                                         <rect x="0" y="20" width="10" height="140" fill="url(#legendGrad2)" rx="2"/>
                                         <!-- Title label -->
-                                        <text x="5" y="10" fill="#475569" font-size="11" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">°C</text>
+                                        <text x="5" y="10" fill="#475569" font-size="11" font-weight="700" font-family="var(--site-display)" text-anchor="middle">°C</text>
                                         <!-- Ticks / Values -->
-                                        <text x="18" y="25" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">1600</text>
-                                        <text x="18" y="67" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">1200</text>
-                                        <text x="18" y="109" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">800</text>
-                                        <text x="18" y="155" fill="#475569" font-size="10" font-family="'Inter', sans-serif" font-weight="500">400</text>
+                                        <text x="18" y="25" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">1600</text>
+                                        <text x="18" y="67" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">1200</text>
+                                        <text x="18" y="109" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">800</text>
+                                        <text x="18" y="155" fill="#475569" font-size="10" font-family="var(--site-body)" font-weight="500">400</text>
                                     </g>
                                 </svg>
                             </div>
@@ -1550,20 +1517,20 @@
                                     <line x1="120" y1="195" x2="280" y2="195" stroke="#475569" stroke-width="1"/>
                                     <line x1="120" y1="190" x2="120" y2="200" stroke="#475569" stroke-width="1"/>
                                     <line x1="280" y1="190" x2="280" y2="200" stroke="#475569" stroke-width="1"/>
-                                    <text x="200" y="212" fill="#1e293b" font-size="11" font-family="'Outfit', sans-serif" font-weight="600" text-anchor="middle">Width: 6.8mm</text>
+                                    <text x="200" y="212" fill="#1e293b" font-size="11" font-family="var(--site-display)" font-weight="600" text-anchor="middle">Width: 6.8mm</text>
                                     
                                     <!-- Height Dimension -->
                                     <line x1="295" y1="125" x2="295" y2="180" stroke="#475569" stroke-width="1"/>
                                     <line x1="290" y1="125" x2="300" y2="125" stroke="#475569" stroke-width="1"/>
                                     <line x1="290" y1="180" x2="300" y2="180" stroke="#475569" stroke-width="1"/>
-                                    <text x="306" y="157" fill="#1e293b" font-size="11" font-family="'Outfit', sans-serif" font-weight="600" alignment-baseline="middle">Height: 2.35mm</text>
+                                    <text x="306" y="157" fill="#1e293b" font-size="11" font-family="var(--site-display)" font-weight="600" alignment-baseline="middle">Height: 2.35mm</text>
 
                                     <!-- Center Line -->
                                     <line x1="200" y1="120" x2="200" y2="190" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
 
                                     <!-- Labels for features -->
-                                    <text x="200" y="160" fill="#10b981" font-size="11" font-family="'Outfit', sans-serif" font-weight="700" text-anchor="middle">Weld Bead Profile</text>
-                                    <text x="200" y="190" fill="#ef4444" font-size="9" font-family="'Outfit', sans-serif" font-weight="700" text-anchor="middle">Dilution/Penetration</text>
+                                    <text x="200" y="160" fill="#10b981" font-size="11" font-family="var(--site-display)" font-weight="700" text-anchor="middle">Weld Bead Profile</text>
+                                    <text x="200" y="190" fill="#ef4444" font-size="9" font-family="var(--site-display)" font-weight="700" text-anchor="middle">Dilution/Penetration</text>
                                 </svg>
                             </div>
                         </div>
@@ -1584,19 +1551,19 @@
                                     <line x1="50" y1="210" x2="400" y2="210" stroke="#475569" stroke-width="1.5"/>
                                     
                                     <!-- Axis Labels -->
-                                    <text x="35" y="45" fill="#475569" font-size="10" font-family="'Outfit', sans-serif" font-weight="600" text-anchor="end">Temp (°C)</text>
-                                    <text x="390" y="225" fill="#475569" font-size="10" font-family="'Outfit', sans-serif" font-weight="600" text-anchor="end">Time (s)</text>
+                                    <text x="35" y="45" fill="#475569" font-size="10" font-family="var(--site-display)" font-weight="600" text-anchor="end">Temp (°C)</text>
+                                    <text x="390" y="225" fill="#475569" font-size="10" font-family="var(--site-display)" font-weight="600" text-anchor="end">Time (s)</text>
                                     
                                     <!-- Axis Ticks & Values -->
-                                    <text x="42" y="64" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="end">1600</text>
-                                    <text x="42" y="114" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="end">1000</text>
-                                    <text x="42" y="164" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="end">400</text>
-                                    <text x="42" y="214" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="end">0</text>
+                                    <text x="42" y="64" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="end">1600</text>
+                                    <text x="42" y="114" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="end">1000</text>
+                                    <text x="42" y="164" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="end">400</text>
+                                    <text x="42" y="214" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="end">0</text>
 
-                                    <text x="50" y="224" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="middle">0</text>
-                                    <text x="160" y="224" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="middle">10</text>
-                                    <text x="270" y="224" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="middle">20</text>
-                                    <text x="380" y="224" fill="#64748b" font-size="9" font-family="'Inter', sans-serif" text-anchor="middle">30</text>
+                                    <text x="50" y="224" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="middle">0</text>
+                                    <text x="160" y="224" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="middle">10</text>
+                                    <text x="270" y="224" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="middle">20</text>
+                                    <text x="380" y="224" fill="#64748b" font-size="9" font-family="var(--site-body)" text-anchor="middle">30</text>
                                     
                                     <!-- Curves -->
                                     <!-- actual cooling curve (Unoptimized - high stress) -->
@@ -1608,13 +1575,13 @@
                                     <rect x="230" y="55" width="140" height="45" fill="rgba(255,255,255,0.9)" rx="6" stroke="#e2e8f0" stroke-width="1"/>
                                     
                                     <line x1="240" y1="68" x2="260" y2="68" stroke="#ef4444" stroke-width="3"/>
-                                    <text x="268" y="72" fill="#1e293b" font-size="9.5" font-family="'Outfit', sans-serif" font-weight="600">Unoptimized Path</text>
+                                    <text x="268" y="72" fill="#1e293b" font-size="9.5" font-family="var(--site-display)" font-weight="600">Unoptimized Path</text>
                                     
                                     <line x1="240" y1="88" x2="260" y2="88" stroke="#10b981" stroke-width="2.5" stroke-dasharray="3 2"/>
-                                    <text x="268" y="92" fill="#1e293b" font-size="9.5" font-family="'Outfit', sans-serif" font-weight="600">Optimized Target</text>
+                                    <text x="268" y="92" fill="#1e293b" font-size="9.5" font-family="var(--site-display)" font-weight="600">Optimized Target</text>
 
                                     <!-- Title / Helper -->
-                                    <text x="215" y="25" fill="#1e293b" font-size="11" font-family="'Outfit', sans-serif" font-weight="700" text-anchor="middle">Transient Thermal Relaxation Profile</text>
+                                    <text x="215" y="25" fill="#1e293b" font-size="11" font-family="var(--site-display)" font-weight="700" text-anchor="middle">Transient Thermal Relaxation Profile</text>
                                 </svg>
                             </div>
                         </div>
@@ -1686,8 +1653,8 @@
                     <p class="text-white-50 mb-4">Partner with Peatech to accelerate research, pilot projects, and industrial deployments of PeaSyn.</p>
                     
                     <div class="d-flex gap-3 justify-content-center flex-wrap">
-                        <button class="btn btn-cta-light" data-bs-toggle="modal" data-bs-target="#demoRequestModal" data-bs-mode="partner">Partner With Us</button>
-                        <button class="btn btn-cta-outline" data-bs-toggle="modal" data-bs-target="#demoRequestModal" data-bs-mode="demo">Request a Demo</button>
+                        <a class="btn btn-cta-light" href="#enquiry">Partner With Us</a>
+                        <a class="btn btn-cta-outline" href="#enquiry">Request a Demo</a>
                     </div>
                 </div>
             </div>
@@ -1695,88 +1662,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <img src="images/peatechlogo.webp" alt="Peatech Logo" class="footer-logo">
-                    <p>Peatech Services — Technology &amp; Engineering. We build bridges that make life and business flow better.</p>
-                    <p><i class="fas fa-map-marker-alt me-2"></i> 5247 Wilson Mills RD #1012 Richmond Heights, OH 44143-3016 United States</p>
-                    <p><a href="#">Show on map</a></p>
-                    <div class="social-icons mt-4">
-                        <a href="https://www.facebook.com/share/1DqeqTDb7V/" class="mx-2"><i class="fab fa-facebook-f"></i></a>
-                    <!--<a href="https://twitter.com/peatech" class="mx-2"><i class="fab fa-twitter"></i></a>-->
-                    <a href="https://www.instagram.com/peatechsmartservices?stkn=MW5rN2RxbmZrd2Y0ZA==" class="mx-2"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/peatech-smart-services/" class="mx-2"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h5>Need to connect?</h5>
-                    <!--<p><i class="fas fa-phone me-2"></i> <a href="tel:+18001234567">+1-800-123-4567</a></p>-->
-                    <p class="text-muted">Monday – Friday: 8:00-18:00<br>Saturday: 9:00 – 14:00</p>
-                    <hr class="footer-divider">
-                    <p><i class="fas fa-envelope me-2"></i> <a href="mailto:info@peatechservice.com">info@peatechservice.com</a></p>
-                </div>
-                <div class="col-lg-4">
-                    <h5>Connection Points</h5>
-                    <ul>
-                        <li><a href="index.php#services">Our Services</a></li>
-                        <li><a href="peasyn.php">PeaSyn</a></li>
-                        <li><a href="index.php#vision">Our Vision</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">Success Stories</a></li>
-                        <li><a href="careers">Join Our Team</a></li>
-                        <li><a href="index.php#contact">Connect With Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="footer-divider">
-            <div class="copyright">
-                <p class="mb-0">© 2026 Peatech Services. All rights reserved. | Technology &amp; Engineering | <a href="privacy-policy.php" style="color: #bbb; text-decoration: none;">Privacy Policy</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Demo Request Modal -->
-    <div class="modal fade" id="demoRequestModal" tabindex="-1" aria-labelledby="demoRequestModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2); background-color: #1a2a3a; color: #f8fafc;">
-                <div class="modal-header" style="border-bottom: 1px solid #2d3e50;">
-                    <h5 class="modal-title" id="demoRequestModalLabel" style="font-family: 'Outfit'; font-weight: 700; color: #10b981;"><i class="fas fa-laptop-code me-2"></i>Request a PeaSyn Demo</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <form id="demoRequestForm">
-                        <div class="mb-3">
-                            <label for="demoName" class="form-label" style="font-size: 0.9rem; font-weight: 500; color: #cbd5e1;">Full Name</label>
-                            <input type="text" class="form-control" id="demoName" required placeholder="Enter your full name" style="background-color: #111e2b; border: 1px solid #2d3e50; color: #f8fafc; border-radius: 8px; padding: 10px;">
-                        </div>
-                        <div class="mb-3">
-                            <label for="demoEmail" class="form-label" style="font-size: 0.9rem; font-weight: 500; color: #cbd5e1;">Work Email</label>
-                            <input type="email" class="form-control" id="demoEmail" required placeholder="name@company.com" style="background-color: #111e2b; border: 1px solid #2d3e50; color: #f8fafc; border-radius: 8px; padding: 10px;">
-                        </div>
-                        <div class="mb-3">
-                            <label for="demoCompany" class="form-label" style="font-size: 0.9rem; font-weight: 500; color: #cbd5e1;">Company / Organization</label>
-                            <input type="text" class="form-control" id="demoCompany" required placeholder="Enter your company name" style="background-color: #111e2b; border: 1px solid #2d3e50; color: #f8fafc; border-radius: 8px; padding: 10px;">
-                        </div>
-                        <div class="mb-3">
-                            <label for="demoMessage" class="form-label" style="font-size: 0.9rem; font-weight: 500; color: #cbd5e1;">Your Project Use Case</label>
-                            <textarea class="form-control" id="demoMessage" rows="3" placeholder="Describe your WAAM simulation or production goals..." style="background-color: #111e2b; border: 1px solid #2d3e50; color: #f8fafc; border-radius: 8px; padding: 10px;"></textarea>
-                        </div>
-                        <div class="mt-4">
-                            <button type="submit" class="btn w-100" style="background-color: #10b981; border: none; padding: 12px; font-weight: 600; border-radius: 8px; color: #1a2a3a; transition: all 0.3s; font-family: 'Outfit';">Submit Request</button>
-                        </div>
-                    </form>
-                    <div id="demoSuccessMessage" class="text-center d-none py-4">
-                        <i class="fas fa-check-circle text-success mb-3" style="font-size: 3.5rem;"></i>
-                        <h4 style="font-family: 'Outfit'; color: #f8fafc; font-weight: 700;">Demo Request Received!</h4>
-                        <p class="text-white-50 mt-2 px-2" style="font-size: 0.95rem;">Thank you for your interest. A PeaSyn technical specialist will contact you shortly to schedule your live simulation demo.</p>
-                        <button type="button" class="btn btn-outline-light mt-3" data-bs-dismiss="modal" style="border-radius: 8px; padding: 8px 20px;">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php require __DIR__ . '/product-enquiry-form.php'; ?>
+    <?php require __DIR__ . '/site-footer.php'; ?>
 
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1801,43 +1688,6 @@
             evt.currentTarget.classList.add("active");
         }
 
-        // Dynamic Modal content updater based on triggering button
-        const demoRequestModal = document.getElementById('demoRequestModal');
-        demoRequestModal.addEventListener('show.bs.modal', function(event) {
-            const button = event.relatedTarget;
-            const mode = button.getAttribute('data-bs-mode') || 'demo';
-            
-            const modalTitle = demoRequestModal.querySelector('.modal-title');
-            const submitBtn = demoRequestModal.querySelector('button[type="submit"]');
-            const successTitle = demoRequestModal.querySelector('#demoSuccessMessage h4');
-            const successText = demoRequestModal.querySelector('#demoSuccessMessage p');
-            
-            if (mode === 'partner') {
-                modalTitle.innerHTML = '<i class="fas fa-handshake me-2"></i>Partner with Peatech / PeaSyn';
-                submitBtn.textContent = 'Submit Partnership Request';
-                successTitle.textContent = 'Partnership Request Received!';
-                successText.textContent = 'Thank you for your interest. A partnership coordinator from our team will contact you shortly.';
-            } else {
-                modalTitle.innerHTML = '<i class="fas fa-laptop-code me-2"></i>Request a PeaSyn Demo';
-                submitBtn.textContent = 'Submit Request';
-                successTitle.textContent = 'Demo Request Received!';
-                successText.textContent = 'Thank you for your interest. A PeaSyn technical specialist will contact you shortly to schedule your live simulation demo.';
-            }
-        });
-
-        // Demo request form submission handler
-        document.getElementById('demoRequestForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('demoRequestForm').classList.add('d-none');
-            document.getElementById('demoSuccessMessage').classList.remove('d-none');
-        });
-
-        // Reset form on modal hide
-        document.getElementById('demoRequestModal').addEventListener('hidden.bs.modal', function() {
-            document.getElementById('demoRequestForm').reset();
-            document.getElementById('demoRequestForm').classList.remove('d-none');
-            document.getElementById('demoSuccessMessage').classList.add('d-none');
-        });
     </script>
 </body>
 </html>
