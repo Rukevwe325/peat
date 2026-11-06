@@ -508,7 +508,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="job-header-meta">
                 <span><i class="fas fa-briefcase"></i> <?php echo htmlspecialchars($job_info['department']); ?></span>
                 <?php if (!empty($job_info['location'])): ?><span><i class="fas fa-map-marker-alt"></i> <?php echo htmlspecialchars($job_info['location']); ?></span><?php endif; ?>
-                <span class="badge-custom"><?php echo htmlspecialchars($job_info['type']); ?></span>
+                <?php if (!empty($job_info['type'])): ?><span class="badge-custom"><?php echo htmlspecialchars($job_info['type']); ?></span><?php endif; ?>
             </div>
         </div>
     </section>
@@ -603,15 +603,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <?php endif; ?>
 
+                        <?php if (!empty($job_info['type'])): ?>
                         <div class="mb-4">
                             <div class="text-muted small fw-semibold text-uppercase" style="font-size:0.75rem;">Employment Type</div>
                             <div class="fw-semibold text-dark"><?php echo htmlspecialchars($job_info['type']); ?></div>
                         </div>
 
+                        <?php endif; ?>
                         <a href="<?php echo htmlspecialchars($job_info['apply_url']); ?>" class="btn-submit-job text-center text-decoration-none d-block py-3 fs-6">
                             Apply for this Position <i class="fas fa-arrow-right ms-2"></i>
                         </a>
 
+                        <?php if ($job_info['show_application_notes'] ?? true): ?>
                         <div class="mt-4 pt-3 border-top text-muted small">
                             <div class="d-flex align-items-center gap-2 mb-2">
                                 <i class="fas fa-shield-alt text-primary"></i> Confidential hiring process
@@ -624,6 +627,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
+                        <?php endif; ?>
                     <?php else: ?>
                         <!-- Embedded Form Fallback for other jobs -->
                         <div class="form-title">Apply for this Position</div>

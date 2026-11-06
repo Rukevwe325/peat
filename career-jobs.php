@@ -101,6 +101,46 @@ $jobs = [
         ]
     ],
 
+    'sales-marketing-strategist' => [
+        'title' => 'Sales & Marketing Strategist',
+        'department' => 'Sales & Marketing',
+        'location' => '',
+        'type' => 'Full-Time',
+        'show_application_notes' => false,
+        'apply_url' => '/apply-sales-marketing-strategist',
+        'job_id' => 'PTECH-2026-SMS01',
+        'roles' => ['Sales & Marketing Strategist' => 'Sales & Marketing Strategist'],
+        'description' => 'Develop and execute B2B sales and marketing strategies for Peatech Services. You will generate qualified opportunities, strengthen Peatech’s market presence, and turn technical capabilities into clear commercial opportunities across Nigeria and the United States.',
+        'responsibilities' => [
+            'Sales and business development' => [
+                'Develop and implement B2B sales strategies to acquire enterprise clients.',
+                'Manage lead generation, prospecting, client relationships, and the sales pipeline.',
+                'Prepare client proposals, sales presentations, and commercial messaging.'
+            ],
+            'Marketing and market research' => [
+                'Coordinate branding and digital marketing campaigns for Peatech Services and PeaSyn.',
+                'Research target markets, track competitor activity and customer needs, and identify new business opportunities.'
+            ],
+            'Technical collaboration and reporting' => [
+                'Work with technical and R&D teams to explain Peatech’s engineering, automation, AI, and simulation capabilities to prospective clients.',
+                'Report regularly on sales activity, pipeline development, campaign performance, and revenue.'
+            ]
+        ],
+        'requirements' => [
+            'Experience in B2B sales, business development, or marketing, with examples of generating qualified opportunities.',
+            'Ability to manage prospecting, client relationships, and a sales pipeline using a CRM or similar tracking tool.',
+            'Experience planning digital or outbound campaigns and measuring their performance.',
+            'Strong writing and presentation skills for client proposals, sales pitches, and commercial messaging.',
+            'Ability to research markets and competitors and turn technical capabilities into clear business value for clients.',
+            'Familiarity with technology or engineering services, or with B2B sales in Nigeria or the United States, is an advantage.'
+        ],
+        'attendance_question' => 'Are you available to coordinate with clients and colleagues across the Nigerian and US markets?',
+        'screening_fields' => [
+            'b2b_sales_experience' => 'Describe your experience developing B2B sales opportunities and managing a pipeline',
+            'marketing_campaign' => 'Describe a marketing campaign you worked on, your contribution, and how you measured its results'
+        ]
+    ],
+
     // Existing jobs retained
     'sales-marketing-specialist' => [
         'title' => 'Sales/Marketing Specialist',

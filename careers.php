@@ -406,20 +406,18 @@
                     </div>
                 </div>
 
-                <!-- Sales/Marketing Specialist (Commented Out)
+                <!-- Sales & Marketing Strategist -->
                 <div class="col-md-6">
                     <div class="opening-card">
-                        <h3 class="opening-title">Sales/Marketing Specialist</h3>
+                        <h3 class="opening-title">Sales &amp; Marketing Strategist</h3>
                         <div class="opening-meta">
-                            <span><i class="fas fa-briefcase"></i> Sales & Marketing</span>
-                            <span><i class="fas fa-map-marker-alt"></i> Richmond Heights, OH (On-Site)</span>
+                            <span><i class="fas fa-briefcase"></i> Sales &amp; Marketing</span>
                             <span class="badge-custom">Full-Time</span>
                         </div>
-                        <p class="opening-desc">Drive customer outreach, manage B2B pipelines, packaging complex digital twins and physics simulation solutions into impactful brand campaigns, and coordinate partnership strategies.</p>
-                        <a href="career/sales-marketing-specialist" class="btn-view-job">View Job & Apply</a>
+                        <p class="opening-desc">Build B2B sales and marketing campaigns, develop qualified opportunities, and help clients understand what Peatech can build for them across Nigeria and the United States.</p>
+                        <a href="/career/sales-marketing-strategist" class="btn-view-job">View Job &amp; Apply</a>
                     </div>
                 </div>
-                -->
             </div>
         </div>
     </section>

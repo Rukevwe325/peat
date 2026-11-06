@@ -17,6 +17,7 @@ RewriteRule ^(acuvita|koda|ghmera)/?$ $1.php [L,QSA]
 RewriteRule ^apply-operations/?$ apply-operations.php [L,QSA]
 RewriteRule ^apply-engineering-intern/?$ apply-engineering-intern.php [L,QSA]
 RewriteRule ^apply-smart-system-engineer/?$ apply-smart-system-engineer.php [L,QSA]
+RewriteRule ^apply-sales-marketing-strategist/?$ apply-sales-marketing-strategist.php [L,QSA]
 
 # SECOND: Handle article and career URLs (supports optional trailing slash)
 RewriteRule ^article/([^/]+)/?$ article.php?slug=$1 [L,QSA]

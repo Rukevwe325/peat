@@ -17,11 +17,11 @@ $job_url = '/career/' . $application_job_slug;
 $available_roles = $application_job['roles'];
 $screening_fields = $application_job['screening_fields'] ?? [];
 $screening_answers = array_fill_keys(array_keys($screening_fields), '');
-$attendance_question = $application_job_slug === 'engineering-intern'
+$attendance_question = $application_job['attendance_question'] ?? ($application_job_slug === 'engineering-intern'
     ? 'Are you available to work on-site for your agreed internship schedule?'
     : ($application_job_slug === 'smart-system-engineer'
         ? 'Are you available for hands-on integration and testing when required?'
-        : 'Are you willing to work from the office five days a week if the job requires?');
+        : 'Are you willing to work from the office five days a week if the job requires?'));
 
 $submit_success = false;
 $submit_error = '';
