@@ -9,10 +9,10 @@ $site_editorial = $site_editorial ?? false;
         <button type="button" class="site-menu-button" aria-controls="site-navigation" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button>
         <nav id="site-navigation" aria-label="Main navigation">
             <a href="/#services">Capabilities</a>
-            <a href="/#products"<?php echo $site_active === 'products' ? ' class="site-active"' : ''; ?>>Portfolio</a>
             <a href="/team"<?php echo $site_active === 'team' ? ' class="site-active" aria-current="page"' : ''; ?>>Team</a>
             <a href="/articles"<?php echo $site_active === 'articles' ? ' class="site-active"' : ''; ?>>Articles</a>
             <a href="/careers"<?php echo $site_active === 'careers' ? ' class="site-active"' : ''; ?>>Careers</a>
+            <a href="https://institute.peatechservice.com/">Peatech Institute</a>
             <?php if ($site_editorial): ?>
                 <?php if (!empty($_SESSION['user_id'])): ?>
                     <details class="site-account"><summary>Account</summary><div>

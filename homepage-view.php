@@ -23,7 +23,7 @@
                 <div class="home-hero-copy">
                     <h1 id="home-headline">Software, engineering,<br><span>and automation.</span></h1>
                     <p class="home-intro">Peatech builds digital products, integrates systems, and automates workflows.</p>
-                    <div class="home-hero-actions"><a href="#contact" class="home-button">Discuss a project <span aria-hidden="true">↗</span></a><a href="#products" class="home-secondary">Explore our portfolio <span aria-hidden="true">↓</span></a></div>
+                    <div class="home-hero-actions"><a href="#contact" class="home-button">Discuss a project <span aria-hidden="true">↗</span></a><a href="#products" class="home-secondary">Explore PeaSyn <span aria-hidden="true">↓</span></a></div>
                 </div>
             </div>
         </section>
@@ -43,27 +43,13 @@
         <section id="products" class="home-section home-products" aria-labelledby="products-heading">
             <div class="home-container">
                 <div class="home-portfolio-heading">
-                    <h2 id="products-heading">Our portfolio</h2>
-                    <p>Products we’re building, from engineering simulation to platforms for everyday use.</p>
+                    <h2 id="products-heading">Engineering in practice</h2>
+                    <p>Meet PeaSyn, our platform for simulation and manufacturing intelligence.</p>
                 </div>
-                <div class="home-portfolio-grid">
-                    <a class="home-work home-work-peasyn" href="/peasyn">
-                        <img class="home-work-study" src="/images/peasyn-thermal-study.svg" width="640" height="340" loading="lazy" alt="Thermal simulation of heat spreading along a deposited metal bead">
-                        <div class="home-work-copy"><p class="home-work-category">Simulation &amp; digital twins</p><h3>PeaSyn <span aria-hidden="true">↗</span></h3><p>Combines machine behavior, process data, and physics-guided models to help engineers understand how manufacturing processes behave.</p></div>
-                    </a>
-                    <a class="home-work home-work-acuvita" href="/acuvita">
-                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
-                        <div class="home-work-copy"><p class="home-work-category">Wellness software</p><h3>AcuVita <span aria-hidden="true">↗</span></h3><p>Helps people build daily wellness habits and choose what to share with their doctor.</p></div>
-                    </a>
-                    <a class="home-work home-work-koda" href="/koda">
-                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v14"/></svg></span>
-                        <div class="home-work-copy"><p class="home-work-category">Education operations</p><h3>KODA <span aria-hidden="true">↗</span></h3><p>Brings coursework, communication, student support, and institutional operations into one platform.</p></div>
-                    </a>
-                    <a class="home-work home-work-ghmera" href="/ghmera">
-                        <span class="home-work-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a7 7 0 0 1-7 7H9l-4 3v-5a7 7 0 0 1 4-12h4a7 7 0 0 1 7 7Z"/><path d="M9 11h6m-3-3v6"/></svg></span>
-                        <div class="home-work-copy"><p class="home-work-category">Community software</p><h3>Ghmera <span aria-hidden="true">↗</span></h3><p>Gives people a structured way to request help, find relevant helpers, and coordinate support.</p></div>
-                    </a>
-                </div>
+                <a class="home-work home-work-peasyn" href="/peasyn">
+                    <img class="home-work-study" src="/images/peasyn-thermal-study.svg" width="640" height="340" loading="lazy" alt="Thermal simulation of heat spreading along a deposited metal bead">
+                    <div class="home-work-copy"><p class="home-work-category">Simulation &amp; digital twins</p><h3>PeaSyn <span aria-hidden="true">↗</span></h3><p>Combines machine behavior, process data, and physics-guided models to help engineers understand how manufacturing processes behave.</p></div>
+                </a>
             </div>
         </section>
 

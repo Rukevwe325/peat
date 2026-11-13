@@ -43,20 +43,16 @@
 .home-products { background:#0d2438; color:#fff; border-top:0; }
 .home-portfolio-heading { margin-bottom:25px; }
 .home-portfolio-heading p { color:#bbcede; margin:8px 0 0; }
-.home-portfolio-grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:12px 24px; }
-.home-work { display:grid; grid-template-columns:auto minmax(0,1fr); align-content:center; gap:clamp(12px,2vw,22px); padding:clamp(14px,1.8vw,22px); border:1px solid #ffffff29; border-radius:12px; background:#142e45; }
+.home-work { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); align-items:center; overflow:hidden; border:1px solid #ffffff29; border-radius:12px; background:#142e45; }
 .home-work:hover { border-color:#77d1ff; background:#193951; }
 .home-work:focus-visible { outline-color:#77d1ff; }
 .home-work:hover h3 { text-decoration:underline; text-underline-offset:4px; }
-.home-work-icon { display:grid; place-items:center; width:clamp(34px,4vw,44px); aspect-ratio:1; border-radius:9px; background:#214760; color:#94dcff; }
-.home-work-icon svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.65; stroke-linecap:round; stroke-linejoin:round; }
 .home-work-copy h3 { display:flex; justify-content:space-between; align-items:baseline; gap:12px; font-size:1.3rem; margin-bottom:6px; }
 .home-work-copy h3 span { font-size:1rem; color:#94dcff; }
 .home-work-copy p { color:#d0deea; margin:0; }
 .home-work-copy .home-work-category { color:#94dcff; font-size:.75rem; font-weight:700; margin-bottom:4px; }
-.home-work-peasyn { grid-row:span 3; grid-template-columns:minmax(0,1fr); align-content:start; padding:0; gap:0; overflow:hidden; }
-.home-work-study { display:block; width:100%; height:auto; aspect-ratio:640 / 340; }
-.home-work-peasyn .home-work-copy { padding:clamp(16px,2.2vw,28px); }
+.home-work-study { display:block; width:100%; height:100%; min-height:240px; object-fit:contain; background:#132d39; }
+.home-work-peasyn .home-work-copy { padding:clamp(22px,4vw,48px); }
 .home-work-peasyn h3 { font-size:clamp(1.75rem,3vw,2.4rem); }
 .home-company { background:#fff; }
 .home-company-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(24px,5vw,68px); }
@@ -106,8 +102,9 @@
     .home-hero-image { object-position:56% center; }
     .home-hero::before { background:linear-gradient(90deg,#0a2943f0,#113e60c9); }
     .home-hero h1 { font-size:clamp(1.95rem,8.8vw,3rem); }
-    .home-capability-list,.home-portfolio-grid,.home-company-grid,.home-contact-grid,.home-about-grid,.home-process,.home-questions { grid-template-columns:1fr; gap:18px; }
-    .home-work-peasyn { grid-row:auto; }
+    .home-capability-list,.home-company-grid,.home-contact-grid,.home-about-grid,.home-process,.home-questions { grid-template-columns:1fr; gap:18px; }
+    .home-work-peasyn { grid-template-columns:minmax(0,1fr); }
+    .home-work-study { min-height:0; height:auto; aspect-ratio:640 / 340; }
     .home-section-heading { margin-bottom:18px; }
     .home-capability-list article { border-top-width:1px; padding-top:10px; }
 }

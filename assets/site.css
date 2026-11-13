@@ -124,8 +124,10 @@ html:has(.site-header) { scroll-padding-top:80px; }
 .site-team-bio p { color:var(--site-muted); margin:0 0 14px; max-width:65ch; }
 .site-team-bio p:last-child { margin-bottom:0; }
 .site-team-link { display:inline-block; color:var(--site-teal); font-weight:750; text-underline-offset:4px; overflow-wrap:anywhere; }
+.site-team-website { display:inline-flex; align-items:center; justify-content:space-between; gap:16px; box-sizing:border-box; max-width:100%; min-height:44px; margin-top:8px; padding:11px 18px; border:1px solid var(--site-teal); border-radius:8px; background:var(--site-teal); color:#fff; font-size:.9rem; font-weight:750; line-height:1.4; text-decoration:none; }
+.site-team-website:hover { background:var(--site-deep); border-color:var(--site-deep); }
 .site-team-intro .site-team-link { margin-bottom:12px; }
-@media(max-width:900px) {
+@media(max-width:1100px) {
     .site-shell { width:calc(100% - 44px); }
     .site-header-inner { flex-wrap:wrap; gap:10px; min-height:62px; padding-block:8px; }
     .site-logo img { width:133px; height:38px; }
