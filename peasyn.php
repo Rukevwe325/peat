@@ -20,7 +20,7 @@ require __DIR__ . '/product-enquiry-handler.php';
     <link rel="stylesheet" href="/assets/products.css">
     <link rel="stylesheet" href="/assets/site.css">
     <link rel="stylesheet" href="/assets/peasyn.css">
-    <link rel="stylesheet" href="/assets/peasyn-visual.css">
+    <link rel="stylesheet" href="/assets/peasyn-visual.css?v=peasyn-links-2">
     <script src="/assets/site.js" defer></script>
     <script src="/assets/peasyn.js" defer></script>
 </head>

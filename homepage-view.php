@@ -9,9 +9,9 @@
     <meta property="og:description" content="Software, intelligent systems, and automation. Built for real-world impact.">
     <meta property="og:type" content="website">
     <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/assets/homepage.css">
+    <link rel="stylesheet" href="/assets/homepage.css?v=peasyn-links-2">
     <link rel="stylesheet" href="/assets/site.css">
-    <link rel="stylesheet" href="/assets/peasyn-visual.css">
+    <link rel="stylesheet" href="/assets/peasyn-visual.css?v=peasyn-links-2">
     <script src="/assets/peasyn.js" defer></script>
     <script src="/assets/site.js" defer></script>
 </head>
@@ -49,8 +49,11 @@
                     <p>Meet PeaSyn. A connected approach to predictive engineering.</p>
                 </div>
                 <article class="home-work home-work-peasyn">
-                    <div class="home-peasyn-visual"><?php require __DIR__ . '/peasyn-visual.php'; ?></div>
-                    <div class="home-work-copy"><p class="home-work-category">PeaSyn / In development</p><h3>Faster predictions.<br>Better engineering decisions.</h3><p>Explore what could happen before making a change. PeaSyn is being developed to connect your engineering models, process data and existing tools, so you can compare options and make informed decisions.</p><a class="home-peasyn-button" href="/peasyn">Explore PeaSyn <span aria-hidden="true">↗</span></a><a class="home-peasyn-discuss" href="/peasyn#enquiry">Discuss your application <span aria-hidden="true">→</span></a></div>
+                    <div class="home-peasyn-visual">
+                        <?php require __DIR__ . '/peasyn-visual.php'; ?>
+                        <a class="home-peasyn-visual-link" href="/peasyn" aria-label="Explore PeaSyn"></a>
+                    </div>
+                    <div class="home-work-copy"><p class="home-work-category">PeaSyn / In development</p><h3>Faster predictions.<br>Better engineering decisions.</h3><p>Explore what could happen before making a change. PeaSyn is being developed to connect your engineering models, process data and existing tools, so you can compare options and make informed decisions.</p><a class="home-peasyn-button" href="/peasyn">Explore PeaSyn <span aria-hidden="true">↗</span></a></div>
                 </article>
             </div>
         </section>

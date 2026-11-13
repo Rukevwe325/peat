@@ -19,5 +19,4 @@
 .psv-results { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:10px 0 14px; }
 .psv-results span { color:#62c4ef; font-size:10px; }
 .psv-results b { display:block; margin-top:3px; color:#d3e4ef; font-weight:600; }
-.ps-visual .psv-caption { color:#91afc4; font-size:9px; margin:0; border-top:1px solid #ffffff14; padding-top:11px; }
 @media(max-width:480px) { .ps-visual { padding:16px; border-radius:14px; } .psv-concept { font-size:8px; } .psv-top { gap:7px; } .psv-results { gap:6px; } .psv-results span { font-size:9px; } }

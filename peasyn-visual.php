@@ -14,5 +14,4 @@
         <div class="psv-temperature"><span>Cooler</span><span class="psv-temperature-scale" aria-hidden="true"></span><span>Hotter</span></div>
     </div>
     <div class="psv-results"><span>01 <b>Connect your tools</b></span><span>02 <b>Explore predictions</b></span><span>03 <b>Compare outcomes</b></span></div>
-    <p class="psv-caption">Illustrative visualization · PeaSyn is in development</p>
 </div>
