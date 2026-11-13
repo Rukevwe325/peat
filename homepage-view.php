@@ -11,6 +11,8 @@
     <link rel="icon" href="/favicon.png" type="image/png">
     <link rel="stylesheet" href="/assets/homepage.css">
     <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/peasyn-visual.css">
+    <script src="/assets/peasyn.js" defer></script>
     <script src="/assets/site.js" defer></script>
 </head>
 <body class="home-page">
@@ -23,7 +25,7 @@
                 <div class="home-hero-copy">
                     <h1 id="home-headline">Software, engineering,<br><span>and automation.</span></h1>
                     <p class="home-intro">Peatech builds digital products, integrates systems, and automates workflows.</p>
-                    <div class="home-hero-actions"><a href="#contact" class="home-button">Discuss a project <span aria-hidden="true">↗</span></a><a href="#products" class="home-secondary">Explore PeaSyn <span aria-hidden="true">↓</span></a></div>
+                    <div class="home-hero-actions"><a href="#contact" class="home-button">Discuss a project <span aria-hidden="true">↗</span></a><a href="/peasyn" class="home-secondary">Explore PeaSyn <span aria-hidden="true">↗</span></a></div>
                 </div>
             </div>
         </section>
@@ -44,12 +46,12 @@
             <div class="home-container">
                 <div class="home-portfolio-heading">
                     <h2 id="products-heading">Engineering in practice</h2>
-                    <p>Meet PeaSyn, our platform for simulation and manufacturing intelligence.</p>
+                    <p>Meet PeaSyn. A connected approach to predictive engineering.</p>
                 </div>
-                <a class="home-work home-work-peasyn" href="/peasyn">
-                    <img class="home-work-study" src="/images/peasyn-thermal-study.svg" width="640" height="340" loading="lazy" alt="Thermal simulation of heat spreading along a deposited metal bead">
-                    <div class="home-work-copy"><p class="home-work-category">Simulation &amp; digital twins</p><h3>PeaSyn <span aria-hidden="true">↗</span></h3><p>Combines machine behavior, process data, and physics-guided models to help engineers understand how manufacturing processes behave.</p></div>
-                </a>
+                <article class="home-work home-work-peasyn">
+                    <div class="home-peasyn-visual"><?php require __DIR__ . '/peasyn-visual.php'; ?></div>
+                    <div class="home-work-copy"><p class="home-work-category">PeaSyn / In development</p><h3>Faster predictions.<br>Better engineering decisions.</h3><p>Explore what could happen before making a change. PeaSyn is being developed to connect your engineering models, process data and existing tools, so you can compare options and make informed decisions.</p><a class="home-peasyn-button" href="/peasyn">Explore PeaSyn <span aria-hidden="true">↗</span></a><a class="home-peasyn-discuss" href="/peasyn#enquiry">Discuss your application <span aria-hidden="true">→</span></a></div>
+                </article>
             </div>
         </section>
 
@@ -64,7 +66,7 @@
                 <div class="home-company-examples">
                     <h3>What that looks like</h3>
                     <dl>
-                        <div><dt>Test a design before building it</dt><dd>Use simulation to study how a process behaves. With <a href="/peasyn">PeaSyn</a>, one example is examining how heat spreads as metal is deposited.</dd></div>
+                        <div><dt>Explore a change before making it</dt><dd>Bring engineering models, relevant measurements and existing tools together. <a href="/peasyn">PeaSyn</a> is being developed to help teams compare alternatives and understand predicted behaviour.</dd></div>
                         <div><dt>Make equipment data useful</dt><dd>Bring readings from equipment into a software interface so teams can monitor a process without checking each device separately.</dd></div>
                         <div><dt>Reduce manual work</dt><dd>Build a workflow that captures requests, tracks progress, and prompts the next action without relying on spreadsheets and follow-up emails.</dd></div>
                     </dl>
