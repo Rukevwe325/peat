@@ -42,6 +42,9 @@ $pageTitle = $member['name'] ?? ($profileMissing ? 'Team member not found' : 'Ou
                     <?php foreach ($member['bio'] as $paragraph): ?>
                         <p><?= htmlspecialchars($paragraph, ENT_QUOTES, 'UTF-8') ?></p>
                     <?php endforeach; ?>
+                    <?php if (isset($member['website'])): ?>
+                        <p><a class="site-team-link" href="<?= htmlspecialchars($member['website'], ENT_QUOTES, 'UTF-8') ?>">Visit Bathlomew’s personal website <span aria-hidden="true">↗</span></a></p>
+                    <?php endif; ?>
                 </section>
                 <section class="site-team-focus" aria-labelledby="focus-heading">
                     <h2 id="focus-heading">Areas of focus</h2>

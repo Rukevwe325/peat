@@ -3,10 +3,11 @@
 return [
     'bathlomew-ebika' => [
         'name' => 'Bathlomew Ebika',
-        'role' => 'Founder & CEO',
+        'role' => 'Founder',
         'initials' => 'BE',
         'photo' => '/assets/team/bathlomew-ebika.jpg',
         'email' => 'bathlomew.ebika@peatechservice.com',
+        'website' => 'https://www.bathlomewebika.com/',
         'bio' => [
             'Bathlomew Ebika sets Peatech’s direction across software, systems engineering, and automation. His role connects the company’s applied research with the products and engineering services it develops, including PeaSyn’s work in manufacturing simulation.',
             'His background in industrial automation, thermal management, and electromechanical testing informs how Peatech approaches technical problems, from deciding what to model to identifying what a team needs to test before building.',
@@ -40,11 +41,11 @@ return [
     ],
     'peace-ebika' => [
         'name' => 'Peace Ebika',
-        'role' => 'Chief Technology Officer',
+        'role' => 'Co-Founder',
         'initials' => 'PE',
         'photo' => '/assets/team/peace-ebika.jpg',
         'bio' => [
-            'Peace Ebika leads technology at Peatech Services. As CTO, Peace guides technical decisions across product and engineering work and helps teams turn requirements into systems they can build, test, and maintain.',
+            'Peace Ebika is a co-founder of Peatech Services. Peace guides technical decisions across product and engineering work and helps teams turn requirements into systems they can build, test, and maintain.',
             'The role brings together decisions about how software, data, and existing tools fit into a project. Peace helps teams identify what they need to validate early and plan how a prototype can become a system people can use and maintain.',
         ],
         'focus' => ['Technology direction', 'Software and systems architecture', 'Technical validation and integration'],
